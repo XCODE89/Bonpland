@@ -118,7 +118,7 @@ const Home = () => {
                 </div>
               </div>
               <p className="text-sm italic text-muted-foreground">
-                "El equipo de LuxEstate hizo que todo el proceso de compra fuera sencillo y sin estrés. Encontraron exactamente lo que estaba buscando y me guiaron en cada paso."
+                "El equipo de Bonpland hizo que todo el proceso de compra fuera sencillo y sin estrés. Encontraron exactamente lo que estaba buscando y me guiaron en cada paso."
               </p>
             </blockquote>
             
@@ -133,7 +133,7 @@ const Home = () => {
                 </div>
               </div>
               <p className="text-sm italic text-muted-foreground">
-                "Vendí mi propiedad con LuxEstate y fue increíble lo rápido que encontraron compradores. Su conocimiento del mercado y su estrategia de marketing son excepcionales."
+                "Vendí mi propiedad con Bonpland y fue increíble lo rápido que encontraron compradores. Su conocimiento del mercado y su estrategia de marketing son excepcionales."
               </p>
             </blockquote>
             
@@ -148,7 +148,7 @@ const Home = () => {
                 </div>
               </div>
               <p className="text-sm italic text-muted-foreground">
-                "Como inversionista inmobiliario, valoro la asesoría experta que me brinda LuxEstate. Han sido fundamentales para construir mi portafolio de propiedades de alto rendimiento."
+                "Como inversionista inmobiliario, valoro la asesoría experta que me brinda Bonpland. Han sido fundamentales para construir mi portafolio de propiedades de alto rendimiento."
               </p>
             </blockquote>
           </div>

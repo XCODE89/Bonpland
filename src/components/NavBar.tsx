@@ -36,7 +36,7 @@ const NavBar = () => {
       <div className="max-w-screen-xl mx-auto px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Home className="h-6 w-6 text-estate-primary" />
-          <span className="font-semibold text-xl text-estate-primary">LuxEstate</span>
+          <span className="font-semibold text-xl text-estate-primary">Bonpland</span>
         </div>
 
         {isMobile ? (

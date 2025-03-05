@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Home className="h-5 w-5" />
-              <span className="font-semibold text-lg">LuxEstate</span>
+              <span className="font-semibold text-lg">Bonpland</span>
             </div>
             <p className="text-estate-secondary/90 mb-6 text-sm">
               Ofrecemos las mejores propiedades inmobiliarias exclusivas con un servicio personalizado y profesional.
@@ -64,7 +64,7 @@ const Footer = () => {
               </div>
               <div className="flex items-start">
                 <Mail className="h-5 w-5 mr-3 text-estate-secondary" />
-                <span className="text-estate-secondary/90 text-sm">info@luxestate.com</span>
+                <span className="text-estate-secondary/90 text-sm">info@bonpland.com</span>
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-6 border-t border-white/10 text-center text-sm text-estate-secondary/70">
-          <p>&copy; {new Date().getFullYear()} LuxEstate. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Bonpland. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
