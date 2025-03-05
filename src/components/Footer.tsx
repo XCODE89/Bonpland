@@ -56,11 +56,11 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-start">
                 <MapPin className="h-5 w-5 mr-3 text-estate-secondary" />
-                <span className="text-estate-secondary/90 text-sm">Av. Paseo de la Reforma 222, Ciudad de México, México</span>
+                <span className="text-estate-secondary/90 text-sm">direccion</span>
               </div>
               <div className="flex items-start">
                 <Phone className="h-5 w-5 mr-3 text-estate-secondary" />
-                <span className="text-estate-secondary/90 text-sm">+52 55 1234 5678</span>
+                <span className="text-estate-secondary/90 text-sm">telefono</span>
               </div>
               <div className="flex items-start">
                 <Mail className="h-5 w-5 mr-3 text-estate-secondary" />
