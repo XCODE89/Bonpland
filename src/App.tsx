@@ -5,12 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./modules/home/pages/Home";
 import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/Dashboard";
-import DashboardHome from "./pages/dashboard/DashboardHome";
-import PropertiesManagement from "./pages/dashboard/PropertiesManagement";
-import ContactsManagement from "./pages/dashboard/ContactsManagement";
-import SettingsPage from "./pages/dashboard/SettingsPage";
-import Login from "./pages/Login";
+import Dashboard from "./modules/dashboard/pages/Dashboard";
+import DashboardHome from "./modules/dashboard/pages/dashboard/DashboardHome";
+import PropertiesManagement from "./modules/dashboard/pages/dashboard/PropertiesManagement";
+import ContactsManagement from "./modules/dashboard/pages/dashboard/ContactsManagement";
+import SettingsPage from "./modules/dashboard/pages/dashboard/SettingsPage";
+import Login from "./modules/auth/pages/Login";
 
 const queryClient = new QueryClient();
 

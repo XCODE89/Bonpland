@@ -148,7 +148,6 @@ const PropertiesCarousel = () => {
                       width: `${100 / Math.min(slideItems, featuredProperties.length - (slideIndex * slideItems))}%` 
                     }}
                   >
-                    {console.log("hola", property)}
                     <PropertyCard {...property} />
                   </div>
                 ))}

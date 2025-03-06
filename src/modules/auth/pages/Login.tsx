@@ -5,6 +5,7 @@ import { Building, LogIn, User, Lock, UserCheck } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,31 +14,36 @@ const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate login process
-    setTimeout(() => {
-      // For demo purposes, accept any non-empty credentials
-      if (email && password) {
-        // Set authentication state
-        localStorage.setItem("isLoggedIn", "true");
-        
+    try {
+        if (email && password) {
+            console.log("Hola")
+            //! activar cuando haya usuario
+            // const response = await axios.post("/rutaDelBack", {
+            //     email, 
+            //     password
+            // })
+            localStorage.setItem("isLoggedIn", "true");
+            toast({
+              title: "Inicio de sesión exitoso",
+              description: "Bienvenido de nuevo al panel de administración",
+            });
+            navigate("/dashboard");
+          } 
+    } catch (error) {
         toast({
-          title: "Inicio de sesión exitoso",
-          description: "Bienvenido de nuevo al panel de administración",
-        });
-        navigate("/dashboard");
-      } else {
-        toast({
-          title: "Error de inicio de sesión",
-          description: "Por favor verifique sus credenciales e intente nuevamente",
-          variant: "destructive",
-        });
-      }
+            title: `Error de inicio de sesión: ${error}`,
+            description: "Por favor verifique sus credenciales e intente nuevamente",
+            variant: "destructive",
+          });
+
+          //! solo para pruebas
+          navigate("/dashboard")
+    }
       setIsLoading(false);
-    }, 1000);
   };
 
   return (
@@ -55,7 +61,7 @@ const Login = () => {
         ></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-white">
           <Building className="h-16 w-16 mb-6" />
-          <h1 className="text-4xl font-bold mb-4 text-center">EstateAgency</h1>
+          <h1 className="text-4xl font-bold mb-4 text-center">Bonpland</h1>
           <p className="text-lg text-center max-w-md">
             Accede a tu panel de administración para gestionar propiedades y clientes.
           </p>
@@ -68,7 +74,7 @@ const Login = () => {
           <div className="text-center">
             <Link to="/" className="inline-flex items-center text-estate-primary mb-8">
               <Building className="mr-2 h-6 w-6" />
-              <span className="text-xl font-semibold">EstateAgency</span>
+              <span className="text-xl font-semibold">Bonpland</span>
             </Link>
             <h2 className="text-3xl font-bold tracking-tight">Bienvenido de nuevo</h2>
             <p className="text-muted-foreground mt-2">Ingresa tus credenciales para acceder</p>
