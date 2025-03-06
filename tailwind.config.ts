@@ -28,7 +28,7 @@ export default {
 				foreground: 'var(--foreground)',
 				estate: {
 					primary: "#811919",
-					secondary: "#080808",
+					secondary: "#1c1c1c",
 					accent: "#c9a227",
 					light: "#F6F7F8",
 					dark: "#080808"

@@ -1,7 +1,7 @@
 
 import React, { useEffect } from "react";
 import NavBar from "@/components/NavBar";
-import Hero from "@/components/Hero";
+import Hero from "@/modules/home/components/Hero";
 import PropertiesCarousel from "@/components/PropertiesCarousel";
 import Features from "@/components/Features";
 import Footer from "@/components/Footer";

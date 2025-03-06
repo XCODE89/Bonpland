@@ -5,7 +5,7 @@ import { Building, LogIn, User, Lock, UserCheck } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
-// import axios from "axios";
+import api from "@/api/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,10 +22,11 @@ const Login = () => {
         if (email && password) {
             console.log("Hola")
             //! activar cuando haya usuario
-            // const response = await axios.post("/rutaDelBack", {
-            //     email, 
-            //     password
-            // })
+            const response = await api.post("/login", {
+                email, 
+                password
+            })
+            console.log("respuest", api, response)
             localStorage.setItem("isLoggedIn", "true");
             toast({
               title: "Inicio de sesión exitoso",
@@ -39,9 +40,6 @@ const Login = () => {
             description: "Por favor verifique sus credenciales e intente nuevamente",
             variant: "destructive",
           });
-
-          //! solo para pruebas
-          navigate("/dashboard")
     }
       setIsLoading(false);
   };
