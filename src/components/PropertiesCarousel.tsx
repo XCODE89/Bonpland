@@ -67,10 +67,10 @@ const PropertiesCarousel = () => {
   const [isPaused, setIsPaused] = useState(false);
   const itemsToShow = 3;
   const carouselRef = useRef<HTMLDivElement>(null);
-  const slideCount = Math.ceil(featuredProperties.length / itemsToShow);
-  
   // Responsive settings
   const [slideItems, setSlideItems] = useState(itemsToShow);
+  const slideCount = Math.ceil(featuredProperties.length / slideItems);
+  
   
   useEffect(() => {
     const handleResize = () => {
@@ -113,7 +113,8 @@ const PropertiesCarousel = () => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.style.transform = `translateX(-${activeIndex * 100}%)`;
+      console.log("tranforma?", activeIndex)
+      carouselRef.current.style.transform = `translateX(-${activeIndex * 100/slideCount}%)`;
     }
   }, [activeIndex]);
 
@@ -130,8 +131,7 @@ const PropertiesCarousel = () => {
       >
         {Array.from({ length: slideCount }).map((_, slideIndex) => (
           <div 
-            key={slideIndex} 
-            className="flex"
+            key={slideIndex}
             style={{ width: `${100 / slideCount}%` }}
           >
             <div className="flex flex-wrap">
@@ -148,6 +148,7 @@ const PropertiesCarousel = () => {
                       width: `${100 / Math.min(slideItems, featuredProperties.length - (slideIndex * slideItems))}%` 
                     }}
                   >
+                    {console.log("hola", property)}
                     <PropertyCard {...property} />
                   </div>
                 ))}

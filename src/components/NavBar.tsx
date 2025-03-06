@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Home, Search, Phone, Menu, X } from "lucide-react";
+import { Home, Search, Phone, Menu, X, LogIn } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -58,6 +59,7 @@ const NavBar = () => {
                   <a href="#testimonials" className="text-xl font-medium" onClick={toggleMenu}>Testimonios</a>
                   <a href="#about" className="text-xl font-medium" onClick={toggleMenu}>Nosotros</a>
                   <a href="#contact" className="text-xl font-medium" onClick={toggleMenu}>Contacto</a>
+                  <Link to="/dashboard" className="text-estate-dark hover:text-estate-primary transition-colors">Admin</Link>
                   <Button className="mt-8 bg-estate-primary hover:bg-estate-primary/90" onClick={toggleMenu}>
                     <Search className="mr-2 h-4 w-4" /> Buscar Propiedades
                   </Button>
@@ -98,6 +100,9 @@ const NavBar = () => {
               >
                 Contacto
               </a>
+              <Link to="/dashboard" className="text-sm font-medium text-estate-primary relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-estate-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">
+                Admin
+              </Link>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
