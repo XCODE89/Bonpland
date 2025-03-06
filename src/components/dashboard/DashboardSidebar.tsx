@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Home, Building, Users, Settings, LogOut, PieChart } from "lucide-react";
 import {
   Sidebar,
@@ -13,6 +13,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { useToast } from "@/hooks/use-toast";
 
 const menuItems = [
   {
@@ -39,11 +40,27 @@ const menuItems = [
 ];
 
 const DashboardSidebar = () => {
+
+    const navigate = useNavigate();
+    const { toast } = useToast();
+
+    const handleLogout = () => {
+        // Clear auth state
+        localStorage.removeItem("isLoggedIn");
+        
+        toast({
+        title: "Sesión cerrada",
+        description: "Has cerrado sesión correctamente",
+        });
+        
+        navigate("/bl-admin");
+    };
+
   return (
     <Sidebar>
       <SidebarHeader className="p-4 border-b">
         <NavLink to="/" className="flex items-center gap-2">
-          <span className="font-bold text-xl">EstateAdmin</span>
+          <span className="font-bold text-xl">Bonpland</span>
         </NavLink>
       </SidebarHeader>
       
@@ -81,7 +98,7 @@ const DashboardSidebar = () => {
               <span>Volver al sitio</span>
             </NavLink>
           </SidebarMenuButton>
-          <SidebarMenuButton className="text-red-500 hover:bg-red-50">
+          <SidebarMenuButton className="text-red-500 hover:bg-red-50" onClick={handleLogout}>
             <LogOut className="h-5 w-5" />
             <span>Cerrar sesión</span>
           </SidebarMenuButton>
