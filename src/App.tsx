@@ -11,6 +11,7 @@ import PropertiesManagement from "./modules/dashboard/pages/dashboard/Properties
 import ContactsManagement from "./modules/dashboard/pages/dashboard/ContactsManagement";
 import SettingsPage from "./modules/dashboard/pages/dashboard/SettingsPage";
 import Login from "./modules/auth/pages/Login";
+import PropertyDetail from "./pages/PropertyDetail";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bl-admin" element={<Login />} />
+          <Route path="/property/:id" element={<PropertyDetail />} />
 
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<DashboardHome />} />
