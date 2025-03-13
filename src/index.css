@@ -161,9 +161,6 @@
   }
 }
 
-.glass-morphism {
-  @apply bg-white/70 backdrop-blur-md shadow-sm border border-white/50;
-}
 
 .scroll-trigger {
   opacity: 0;

@@ -32,7 +32,7 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-estate-primary text-estate-dark hover:bg-estate-light">
+            <Button size="lg" className="bg-estate-primary text-estate-light hover:bg-estate-light">
               <Search className="mr-2 h-4 w-4" /> 
               Buscar propiedades
             </Button>
@@ -46,7 +46,7 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-10 left-0 right-0 mx-auto text-center animate-bounce">
-        <a href="#properties" className="text-white/80 inline-flex flex-col items-center">
+        <a href="#properties" className="text-estate-secondary font-bold inline-flex flex-col items-center">
           <span className="text-sm mb-2">Descubre más</span>
           <ArrowRight className="h-5 w-5 rotate-90" />
         </a>

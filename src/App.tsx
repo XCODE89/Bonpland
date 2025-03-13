@@ -12,7 +12,7 @@ import ContactsManagement from "./modules/dashboard/pages/dashboard/ContactsMana
 import SettingsPage from "./modules/dashboard/pages/dashboard/SettingsPage";
 import Login from "./modules/auth/pages/Login";
 import PropertyDetail from "./pages/PropertyDetail";
-import AllProperties from "./pages/AllProperties";
+import AllProperties from "./modules/properties/pages/AllProperties";
 
 const queryClient = new QueryClient();
 

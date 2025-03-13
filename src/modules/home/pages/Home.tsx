@@ -47,7 +47,7 @@ const Home = () => {
             Propiedades destacadas
           </h2>
           <p className="text-muted-foreground">
-            Slogan, parrafo
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti minima optio delectus deserunt asperiores repudiandae quibusdam atque id minus facere veniam voluptate laboriosam unde quasi adipisci deleniti, ipsam voluptatem modi.
           </p>
         </div>
 
@@ -162,54 +162,54 @@ const Home = () => {
               <div className="estate-chip bg-white/20 text-white backdrop-blur-sm mb-4">
                 <span>¿Preguntas? Contáctanos</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-estate-accent">
                 Estamos aquí para ayudarte
               </h2>
-              <p className="text-estate-secondary/90 mb-6">
+              <p className="text-estate-light mb-6">
                 Nuestro equipo de expertos inmobiliarios está listo para responder todas tus preguntas y ayudarte a encontrar la propiedad perfecta.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-white text-estate-primary hover:bg-white/90">
+                <Button className="bg-estate-accent text-estate-primary hover:bg-white/50">
                   Llamar ahora
                 </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button variant="outline" className="bg-transparent border-estate-accent text-estate-accent hover:bg-white/50">
                   Enviar mensaje
                 </Button>
               </div>
             </div>
             
-            <div className="glass-morphism p-8 rounded-lg bg-white/10 border-white/20 md:max-w-md w-full scroll-trigger">
+            <div className="p-8 rounded-lg bg-white/70 border-white/20 md:max-w-md w-full scroll-trigger">
               <h3 className="text-xl font-semibold mb-6">Déjanos tus datos</h3>
               <form className="space-y-4">
                 <div>
                   <input
                     type="text"
                     placeholder="Nombre completo"
-                    className="w-full p-3 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+                    className="w-full p-3 rounded-md bg-estate-white border border-white/50 text-estate-dark placeholder:text-black/50 focus:outline-none focus:ring-2 focus:ring-white/30"
                   />
                 </div>
                 <div>
                   <input
                     type="email"
                     placeholder="Email"
-                    className="w-full p-3 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+                    className="w-full p-3 rounded-md bg-estate-white border border-white/20 text-estate-dark placeholder:text-black/50 focus:outline-none focus:ring-2 focus:ring-white/30 "
                   />
                 </div>
                 <div>
                   <input
                     type="tel"
                     placeholder="Teléfono"
-                    className="w-full p-3 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+                    className="w-full p-3 rounded-md bg-estate-white border border-white/20 text-estate-dark placeholder:text-black/50 focus:outline-none focus:ring-2 focus:ring-white/30"
                   />
                 </div>
                 <div>
                   <textarea
                     placeholder="Mensaje"
                     rows={4}
-                    className="w-full p-3 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
+                    className="w-full p-3 rounded-md bg-estate-white border border-white/20 text-estate-dark placeholder:text-black/50 focus:outline-none focus:ring-2 focus:ring-white/30"
                   ></textarea>
                 </div>
-                <Button className="w-full bg-white text-estate-primary hover:bg-white/90">
+                <Button className="w-full bg-estate-accent text-estate-primary hover:bg-estate-accent/70">
                   Enviar mensaje
                 </Button>
               </form>

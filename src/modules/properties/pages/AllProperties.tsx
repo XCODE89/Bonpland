@@ -176,7 +176,7 @@ const AllProperties = () => {
       : "bg-muted/60 text-muted-foreground hover:bg-muted";
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="mt-24 min-h-screen flex flex-col">
       <NavBar />
 
       <div className="py-12 bg-estate-secondary/5">

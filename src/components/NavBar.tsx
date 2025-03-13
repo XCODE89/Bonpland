@@ -71,7 +71,7 @@ const NavBar = () => {
           <>
             <nav className="hidden md:flex items-center space-x-8">
               <a
-                href="#properties"
+                href="/properties"
                 className="text-lg font-medium text-estate-primary relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-estate-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
                 Propiedades
