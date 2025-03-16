@@ -16,6 +16,8 @@ const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormP
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  //todo: completar el envio de formulario
+  console.log(propertyId)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

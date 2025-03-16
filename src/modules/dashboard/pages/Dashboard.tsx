@@ -10,7 +10,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         // For demo purposes, we'll just check localStorage
-        const isAuthenticated = localStorage.getItem("isLoggedIn") === "true";
+        const isAuthenticated = localStorage.getItem("token");
         
         if (!isAuthenticated) {
             toast({

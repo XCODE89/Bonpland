@@ -43,7 +43,7 @@ export default {
 					foreground: 'var(--secondary-foreground)'
 				},
 				destructive: {
-					DEFAULT: 'var(--destructive))',
+					DEFAULT: 'var(--destructive)',
 					foreground: 'var(--destructive-foreground)'
 				},
 				muted: {

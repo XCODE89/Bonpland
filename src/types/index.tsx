@@ -9,8 +9,8 @@ export interface Property {
     area: number;
     imageUrl: string;
     featured: boolean;
-    propertyType: 'apartment' | 'house' | 'commercial';
-    status: 'for-sale' | 'for-rent' | 'sold';
+    propertyType: string;  //'apartment' | 'house' | 'commercial';
+    propertyStatus: string; // 'for-sale' | 'for-rent' | 'sold';
   }
   
   export interface Contact {

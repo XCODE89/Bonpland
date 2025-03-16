@@ -27,7 +27,7 @@ const propertyData: Record<string, Property> = {
     imageUrl: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
     featured: true,
     propertyType: "apartment",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   "2": {
     id: "2",
@@ -41,7 +41,7 @@ const propertyData: Record<string, Property> = {
     imageUrl: "https://source.unsplash.com/photo-1487958449943-2429e8be8625",
     featured: true,
     propertyType: "house",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   "3": {
     id: "3",
@@ -55,7 +55,7 @@ const propertyData: Record<string, Property> = {
     imageUrl: "https://source.unsplash.com/photo-1497366754035-f200968a6e72",
     featured: false,
     propertyType: "commercial",
-    status: "for-rent",
+    propertyStatus: "for-rent",
   },
 };
 
@@ -130,7 +130,7 @@ const PropertyDetail = () => {
     });
   };
 
-  const getStatusBadge = (status: Property["status"]) => {
+  const getStatusBadge = (status: Property["propertyStatus"]) => {
     switch (status) {
       case "for-sale":
         return <Badge className="bg-blue-500">En Venta</Badge>;
@@ -181,7 +181,7 @@ const PropertyDetail = () => {
             
             <div className="flex flex-col items-start md:items-end gap-2">
               <div className="flex items-center gap-2">
-                {getStatusBadge(property.status)}
+                {getStatusBadge(property.propertyStatus)}
                 <div className="text-2xl md:text-3xl font-bold text-estate-primary">
                   {formatPrice(property.price)}
                 </div>
@@ -312,7 +312,7 @@ const PropertyDetail = () => {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Estado</span>
-                    <span>{getStatusBadge(property.status)}</span>
+                    <span>{getStatusBadge(property.propertyStatus)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Publicado</span>

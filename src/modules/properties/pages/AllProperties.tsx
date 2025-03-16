@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { useProperties } from "../hooks/useProperties";
 
 // Datos de ejemplo (en un proyecto real, esto vendría de una API)
 const allProperties = [
@@ -22,7 +23,7 @@ const allProperties = [
     sqft: 150,
     featured: true,
     propertyType: "apartment",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: 2,
@@ -35,7 +36,7 @@ const allProperties = [
     sqft: 120,
     isNew: true,
     propertyType: "apartment",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: 3,
@@ -48,7 +49,7 @@ const allProperties = [
     sqft: 220,
     featured: true,
     propertyType: "penthouse",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: 4,
@@ -61,7 +62,7 @@ const allProperties = [
     sqft: 95,
     isNew: true,
     propertyType: "apartment",
-    status: "for-rent",
+    propertyStatus: "for-rent",
   },
   {
     id: 5,
@@ -74,7 +75,7 @@ const allProperties = [
     sqft: 280,
     featured: true,
     propertyType: "duplex",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: 6,
@@ -86,7 +87,7 @@ const allProperties = [
     baths: 3,
     sqft: 250,
     propertyType: "house",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: 7,
@@ -99,7 +100,7 @@ const allProperties = [
     sqft: 85,
     isNew: true,
     propertyType: "loft",
-    status: "for-rent",
+    propertyStatus: "for-rent",
   },
   {
     id: 8,
@@ -112,7 +113,7 @@ const allProperties = [
     sqft: 450,
     featured: true,
     propertyType: "house",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: 9,
@@ -124,16 +125,19 @@ const allProperties = [
     baths: 1,
     sqft: 90,
     propertyType: "apartment",
-    status: "for-rent",
+    propertyStatus: "for-rent",
   },
 ];
 
 const AllProperties = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [propertyType, setPropertyType] = useState<string | null>(null);
-  const [status, setStatus] = useState<string | null>(null);
+  const [propertyStatus, setPropertyStatus] = useState<string | null>(null);
   const [minBeds, setMinBeds] = useState<number | null>(null);
   const [minBaths, setMinBaths] = useState<number | null>(null);
+
+  const { status, data, error, isFetching } = useProperties()
+  console.log("data de tanstack", status, data, error, isFetching)
 
   // Filtrar propiedades basado en los criterios seleccionados
   const filteredProperties = allProperties.filter((property) => {
@@ -152,7 +156,7 @@ const AllProperties = () => {
     }
 
     // Filtro por estado (venta/renta)
-    if (status && property.status !== status) {
+    if (propertyStatus && property.propertyStatus !== propertyStatus) {
       return false;
     }
 
@@ -209,7 +213,7 @@ const AllProperties = () => {
                     className="w-full flex justify-between"
                     onClick={() => {
                       setPropertyType(null);
-                      setStatus(null);
+                      setPropertyStatus(null);
                       setMinBeds(null);
                       setMinBaths(null);
                       setSearchTerm("");
@@ -274,14 +278,14 @@ const AllProperties = () => {
                   <h3 className="text-sm font-medium mb-3">Estado</h3>
                   <div className="flex flex-wrap gap-2">
                     <Badge
-                      className={`cursor-pointer ${getFilterBadgeClass(status === "for-sale")}`}
-                      onClick={() => setStatus(status === "for-sale" ? null : "for-sale")}
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyStatus === "for-sale")}`}
+                      onClick={() => setPropertyStatus(propertyStatus === "for-sale" ? null : "for-sale")}
                     >
                       En venta
                     </Badge>
                     <Badge
-                      className={`cursor-pointer ${getFilterBadgeClass(status === "for-rent")}`}
-                      onClick={() => setStatus(status === "for-rent" ? null : "for-rent")}
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyStatus === "for-rent")}`}
+                      onClick={() => setPropertyStatus(propertyStatus === "for-rent" ? null : "for-rent")}
                     >
                       En renta
                     </Badge>

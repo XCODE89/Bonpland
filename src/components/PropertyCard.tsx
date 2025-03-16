@@ -16,7 +16,7 @@ interface PropertyCardProps {
   featured?: boolean;
   isNew?: boolean;
   propertyType?: string;
-  status?: string;
+  propertyStatus?: string;
 }
 
 const PropertyCard = ({
@@ -30,20 +30,20 @@ const PropertyCard = ({
   sqft,
   featured,
   isNew,
-  status,
+  propertyStatus,
 }: PropertyCardProps) => {
   const renderStatusBadge = () => {
-    if (!status) return null;
+    if (!propertyStatus) return null;
     
-    if (status === "for-sale") {
+    if (propertyStatus === "for-sale") {
       return (
-        <div className="estate-tag right-0 left-auto bg-blue-500/80 text-white">
+        <div className="estate-tag right-36 bg-blue-500/80 text-white">
           En Venta
         </div>
       );
-    } else if (status === "for-rent") {
+    } else if (propertyStatus === "for-rent") {
       return (
-        <div className="estate-tag right-0 left-auto bg-amber-500/80 text-white">
+        <div className="estate-tag right-36  bg-amber-500/80 text-white">
           En Renta
         </div>
       );

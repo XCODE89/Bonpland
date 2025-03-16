@@ -5,43 +5,41 @@ import { Building, LogIn, User, Lock, UserCheck } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
-import api from "@/api/api";
+import { useMutation } from "@tanstack/react-query";
+
+import { loginUser } from "@/modules/auth/services/auth.service";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    try {
-        if (email && password) {
-            console.log("Hola")
-            //! activar cuando haya usuario
-            const response = await api.post("/login", {
-                email, 
-                password
-            })
-            console.log("respuest", api, response)
-            localStorage.setItem("isLoggedIn", "true");
-            toast({
-              title: "Inicio de sesión exitoso",
-              description: "Bienvenido de nuevo al panel de administración",
-            });
-            navigate("/dashboard");
-          } 
-    } catch (error) {
+  const mutation = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      localStorage.setItem("token", data.token);
         toast({
-            title: `Error de inicio de sesión: ${error}`,
-            description: "Por favor verifique sus credenciales e intente nuevamente",
-            variant: "destructive",
-          });
-    }
-      setIsLoading(false);
+          title: "Inicio de sesión exitoso",
+          description: "Bienvenido de nuevo al panel de administración",
+        });
+        navigate("/dashboard");
+    },
+    onError: (error) => {
+      toast({
+        title: `${error.message}`,
+        description: "Por favor verifique sus credenciales e intente nuevamente",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutation.mutate({
+      email,
+      password
+    });
   };
 
   return (
@@ -145,8 +143,8 @@ const Login = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
+            <Button type="submit" className="w-full" disabled={mutation.isPending}>
+              {mutation.isPending ? (
                 <>Iniciando sesión...</>
               ) : (
                 <>

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PlusCircle, Search, Edit, Trash2, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Property } from "@/types";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 // Datos de ejemplo
 const mockProperties: Property[] = [
@@ -20,7 +21,7 @@ const mockProperties: Property[] = [
     imageUrl: "https://source.unsplash.com/random/300x200/?apartment",
     featured: true,
     propertyType: "apartment",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: "2",
@@ -34,7 +35,7 @@ const mockProperties: Property[] = [
     imageUrl: "https://source.unsplash.com/random/300x200/?house",
     featured: true,
     propertyType: "house",
-    status: "for-sale",
+    propertyStatus: "for-sale",
   },
   {
     id: "3",
@@ -48,11 +49,12 @@ const mockProperties: Property[] = [
     imageUrl: "https://source.unsplash.com/random/300x200/?store",
     featured: false,
     propertyType: "commercial",
-    status: "for-rent",
+    propertyStatus: "for-rent",
   },
 ];
 
 const PropertiesManagement = () => {
+  const navigate = useNavigate();
   const [properties, setProperties] = useState<Property[]>(mockProperties);
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
@@ -71,7 +73,19 @@ const PropertiesManagement = () => {
     });
   };
 
-  const getStatusBadge = (status: Property["status"]) => {
+  const handleAddProperty = () => {
+    navigate("/dashboard/properties/add");
+  };
+
+  const handleEditProperty = (id: string) => {
+    navigate(`/dashboard/properties/edit/${id}`);
+  };
+
+  const handleViewProperty = (id: string) => {
+    navigate(`/property/${id}`);
+  };
+
+  const getStatusBadge = (status: Property["propertyStatus"]) => {
     switch (status) {
       case "for-sale":
         return <Badge className="bg-blue-500">En Venta</Badge>;
@@ -96,7 +110,7 @@ const PropertiesManagement = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Propiedades</h1>
-        <Button>
+        <Button onClick={handleAddProperty}>
           <PlusCircle className="mr-2 h-4 w-4" />
           Nueva Propiedad
         </Button>
@@ -166,14 +180,22 @@ const PropertiesManagement = () => {
                     {formatPrice(property.price)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {getStatusBadge(property.status)}
+                    {getStatusBadge(property.propertyStatus)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div className="flex gap-2">
-                      <Button variant="ghost" size="sm">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => handleViewProperty(property.id)}
+                      >
                         <Eye className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="sm">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => handleEditProperty(property.id)}
+                      >
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button
