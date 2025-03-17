@@ -1,16 +1,25 @@
+type Location = {
+  country: string;
+  city: string;
+  address: string;
+};
+
 export interface Property {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     price: number;
-    location: string;
+    location: Location;
     bedrooms: number;
     bathrooms: number;
     area: number;
-    imageUrl: string;
-    featured: boolean;
+    images: string;
     propertyType: string;  //'apartment' | 'house' | 'commercial';
-    propertyStatus: string; // 'for-sale' | 'for-rent' | 'sold';
+    contractType: string; //'for-sale' | 'for-rent' | 'sold';
+    propertyStatus: string; // disponibilidad;
+    featured: boolean;
+    isNew: boolean
+    createdAt?: Date
   }
   
   export interface Contact {

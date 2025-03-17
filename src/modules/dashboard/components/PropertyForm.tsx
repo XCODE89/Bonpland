@@ -20,15 +20,31 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
 //   const { toast } = useToast();
   const isEditMode = !!property;
 
+  const [activeTab, setActiveTab] = useState<string>("basic");
+
+  const tabs = ["basic", "details", "images"];  // El orden de las pestañas
+  const currentTabIndex = tabs.indexOf(activeTab);
+
+  const handleChangeTab = (direction: "next" | "prev") => {
+    const newIndex = direction === "next" ? currentTabIndex + 1 : currentTabIndex - 1;
+    // if (newIndex < 0) newIndex = tabs.length - 1;  // Si es anterior y está en la primera pestaña, va al final
+    // if (newIndex >= tabs.length) newIndex = 0;  // Si es siguiente y está en la última pestaña, va al principio
+    setActiveTab(tabs[newIndex]);
+  };
+
   const [formData, setFormData] = useState<Partial<Property>>({
     title: "",
     description: "",
     price: 0,
-    location: "",
+    location: {
+      country: "",
+      city: "",
+      address: "",
+    },
     bedrooms: 0,
     bathrooms: 0,
     area: 0,
-    imageUrl: "https://source.unsplash.com/random/300x200/?apartment",
+    images: "https://source.unsplash.com/random/300x200/?apartment",
     featured: false,
     propertyType: "apartment",
     propertyStatus: "for-sale",
@@ -55,10 +71,21 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
         [name]: parseFloat(value) || 0,
       });
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+      // Si el campo es una propiedad dentro de `location`
+      if (formData.location && name in formData.location) {
+        setFormData({
+          ...formData,
+          location: {
+            ...formData.location,
+            [name]: value,
+          },
+        });
+      } else {
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      }
     }
   };
 
@@ -69,7 +96,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
 
   return (
     <form onSubmit={handleSubmit}>
-      <Tabs defaultValue="basic">
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="mb-4">
           <TabsTrigger value="basic">Información Básica</TabsTrigger>
           <TabsTrigger value="details">Detalles</TabsTrigger>
@@ -135,22 +162,47 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="location" className="text-sm font-medium">
+                <label className="text-sm font-medium">
                   Ubicación
                 </label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
-                    id="location"
-                    name="location"
-                    placeholder="Ciudad, País"
+                    id="country"
+                    name="country"
+                    placeholder="País"
                     className="pl-10"
-                    value={formData.location}
+                    value={formData.location?.country}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="city"
+                    name="city"
+                    placeholder="Ciudad"
+                    className="pl-10"
+                    value={formData.location?.city}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="address"
+                    name="address"
+                    placeholder="Direccion"
+                    className="pl-10"
+                    value={formData.location?.address}
                     onChange={handleChange}
                     required
                   />
                 </div>
               </div>
+              
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -300,7 +352,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                     name="imageUrl"
                     placeholder="URL de la imagen"
                     className="pl-10"
-                    value={formData.imageUrl}
+                    value={formData.images}
                     onChange={handleChange}
                     required
                   />
@@ -322,11 +374,11 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 </Button>
               </div>
 
-              {formData.imageUrl && (
+              {formData.images && (
                 <div className="mt-4">
                   <p className="mb-2 text-sm font-medium">Vista previa:</p>
                   <img 
-                    src={formData.imageUrl} 
+                    src={formData.images} 
                     alt="Vista previa" 
                     className="h-40 w-full object-cover rounded-md"
                   />
@@ -344,9 +396,22 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
           >
             Cancelar
           </Button>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Guardando..." : isEditMode ? "Actualizar propiedad" : "Crear propiedad"}
-          </Button>
+
+          <>
+            {currentTabIndex !== 0 && <Button type="button" onClick={() => handleChangeTab("prev")}>
+              Anterior
+            </Button>}
+            {currentTabIndex !== 2 && <Button type="button" onClick={() => handleChangeTab("next")}>
+              Siguiente
+            </Button>}
+            
+          </>
+        
+        {activeTab === "images" &&
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Guardando..." : isEditMode ? "Actualizar propiedad" : "Crear propiedad"}
+            </Button>
+        }
         </CardFooter>
       </Tabs>
     </form>

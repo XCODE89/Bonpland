@@ -6,59 +6,90 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const featuredProperties = [
   {
-    id: 1,
+    _id: 1,
     title: "Ático de lujo con vistas panorámicas",
-    location: "Polanco, Ciudad de México",
+    
+    location: {
+      country: "Mexico",
+      city: "Polanco",
+      address: "Polanco - Mexico"
+    },
     price: "$3,500,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 3,
-    baths: 2,
-    sqft: 150,
+    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    bedrooms: 3,
+    bathrooms: 2,
+    area: 150,
     featured: true,
+    isNew: true,
+    propertyStatus : "for-sale"
   },
   {
-    id: 2,
+    _id: 2,
     title: "Apartamento moderno en zona exclusiva",
-    location: "Condesa, Ciudad de México",
+    location: {
+      country: "Mexico",
+      city: "Condesa",
+      address: "Condesa - Mexico"
+    },
     price: "$2,200,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 2,
-    baths: 2,
-    sqft: 120,
+    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    bedrooms: 2,
+    bathrooms: 2,
+    area: 120,
     isNew: true,
+    featured: false,
+    propertyStatus : "for-rent"
   },
   {
-    id: 3,
+    _id: 3,
     title: "Penthouse con terraza privada",
-    location: "Santa Fe, Ciudad de México",
+    location: {
+      country: "Mexico",
+      city: "Santa Fé",
+      address: "Santa Fé - Mexico"
+    },
     price: "$4,100,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 4,
-    baths: 3,
-    sqft: 220,
+    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    bedrooms: 4,
+    bathrooms: 3,
+    area: 220,
     featured: true,
+    isNew: false,
+    propertyStatus : "for-sale"
   },
   {
-    id: 4,
+    _id: 4,
     title: "Apartamento con diseño contemporáneo",
-    location: "Roma Norte, Ciudad de México",
+    location: {
+      country: "Mexico",
+      city: "Roma Norte",
+      address: "Roma Norte - Mexico"
+    },
     price: "$1,900,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 2,
-    baths: 1,
-    sqft: 95,
+    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    bedrooms: 2,
+    bathrooms: 1,
+    area: 95,
     isNew: true,
+    featured: true,
+    propertyStatus : "for-rent"
   },
   {
-    id: 5,
+    _id: 5,
     title: "Dúplex con amenidades exclusivas",
-    location: "Lomas de Chapultepec, CDMX",
+    location: {
+      country: "Mexico",
+      city: "Tijuana",
+      address: "Tijuana - Mexico"
+    },
     price: "$5,200,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 4,
-    baths: 3,
-    sqft: 280,
+    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    bedrooms: 4,
+    bathrooms: 3,
+    area: 280,
     featured: true,
+    isNew: true,
+    propertyStatus : "for-sale"
   },
 ];
 
@@ -113,7 +144,6 @@ const PropertiesCarousel = () => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      console.log("tranforma?", activeIndex)
       carouselRef.current.style.transform = `translateX(-${activeIndex * 100/slideCount}%)`;
     }
   }, [activeIndex]);
@@ -142,7 +172,7 @@ const PropertiesCarousel = () => {
                 )
                 .map((property) => (
                   <div
-                    key={property.id}
+                    key={property._id}
                     className="w-full sm:w-1/2 lg:w-1/3 p-4"
                     style={{ 
                       width: `${100 / Math.min(slideItems, featuredProperties.length - (slideIndex * slideItems))}%` 

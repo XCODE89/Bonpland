@@ -11,123 +11,123 @@ import Footer from "@/components/Footer";
 import { useProperties } from "../hooks/useProperties";
 
 // Datos de ejemplo (en un proyecto real, esto vendría de una API)
-const allProperties = [
-  {
-    id: 1,
-    title: "Ático de lujo con vistas panorámicas",
-    location: "Polanco, Ciudad de México",
-    price: "$3,500,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 3,
-    baths: 2,
-    sqft: 150,
-    featured: true,
-    propertyType: "apartment",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: 2,
-    title: "Apartamento moderno en zona exclusiva",
-    location: "Condesa, Ciudad de México",
-    price: "$2,200,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 2,
-    baths: 2,
-    sqft: 120,
-    isNew: true,
-    propertyType: "apartment",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: 3,
-    title: "Penthouse con terraza privada",
-    location: "Santa Fe, Ciudad de México",
-    price: "$4,100,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 4,
-    baths: 3,
-    sqft: 220,
-    featured: true,
-    propertyType: "penthouse",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: 4,
-    title: "Apartamento con diseño contemporáneo",
-    location: "Roma Norte, Ciudad de México",
-    price: "$1,900,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 2,
-    baths: 1,
-    sqft: 95,
-    isNew: true,
-    propertyType: "apartment",
-    propertyStatus: "for-rent",
-  },
-  {
-    id: 5,
-    title: "Dúplex con amenidades exclusivas",
-    location: "Lomas de Chapultepec, CDMX",
-    price: "$5,200,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 4,
-    baths: 3,
-    sqft: 280,
-    featured: true,
-    propertyType: "duplex",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: 6,
-    title: "Casa familiar con jardín amplio",
-    location: "Coyoacán, Ciudad de México",
-    price: "$3,800,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 4,
-    baths: 3,
-    sqft: 250,
-    propertyType: "house",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: 7,
-    title: "Loft industrial renovado",
-    location: "Del Valle, Ciudad de México",
-    price: "$1,750,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 1,
-    baths: 1,
-    sqft: 85,
-    isNew: true,
-    propertyType: "loft",
-    propertyStatus: "for-rent",
-  },
-  {
-    id: 8,
-    title: "Residencia con alberca privada",
-    location: "Jardines del Pedregal, CDMX",
-    price: "$7,500,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 5,
-    baths: 4,
-    sqft: 450,
-    featured: true,
-    propertyType: "house",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: 9,
-    title: "Departamento cerca del centro histórico",
-    location: "Centro, Ciudad de México",
-    price: "$1,200,000",
-    image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    beds: 2,
-    baths: 1,
-    sqft: 90,
-    propertyType: "apartment",
-    propertyStatus: "for-rent",
-  },
-];
+// const allProperties = [
+//   {
+//     id: 1,
+//     title: "Ático de lujo con vistas panorámicas",
+//     location: "Polanco, Ciudad de México",
+//     price: "$3,500,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 3,
+//     baths: 2,
+//     sqft: 150,
+//     featured: true,
+//     propertyType: "apartment",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: 2,
+//     title: "Apartamento moderno en zona exclusiva",
+//     location: "Condesa, Ciudad de México",
+//     price: "$2,200,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 2,
+//     baths: 2,
+//     sqft: 120,
+//     isNew: true,
+//     propertyType: "apartment",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: 3,
+//     title: "Penthouse con terraza privada",
+//     location: "Santa Fe, Ciudad de México",
+//     price: "$4,100,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 4,
+//     baths: 3,
+//     sqft: 220,
+//     featured: true,
+//     propertyType: "penthouse",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: 4,
+//     title: "Apartamento con diseño contemporáneo",
+//     location: "Roma Norte, Ciudad de México",
+//     price: "$1,900,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 2,
+//     baths: 1,
+//     sqft: 95,
+//     isNew: true,
+//     propertyType: "apartment",
+//     propertyStatus: "for-rent",
+//   },
+//   {
+//     id: 5,
+//     title: "Dúplex con amenidades exclusivas",
+//     location: "Lomas de Chapultepec, CDMX",
+//     price: "$5,200,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 4,
+//     baths: 3,
+//     sqft: 280,
+//     featured: true,
+//     propertyType: "duplex",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: 6,
+//     title: "Casa familiar con jardín amplio",
+//     location: "Coyoacán, Ciudad de México",
+//     price: "$3,800,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 4,
+//     baths: 3,
+//     sqft: 250,
+//     propertyType: "house",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: 7,
+//     title: "Loft industrial renovado",
+//     location: "Del Valle, Ciudad de México",
+//     price: "$1,750,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 1,
+//     baths: 1,
+//     sqft: 85,
+//     isNew: true,
+//     propertyType: "loft",
+//     propertyStatus: "for-rent",
+//   },
+//   {
+//     id: 8,
+//     title: "Residencia con alberca privada",
+//     location: "Jardines del Pedregal, CDMX",
+//     price: "$7,500,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 5,
+//     baths: 4,
+//     sqft: 450,
+//     featured: true,
+//     propertyType: "house",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: 9,
+//     title: "Departamento cerca del centro histórico",
+//     location: "Centro, Ciudad de México",
+//     price: "$1,200,000",
+//     image: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     beds: 2,
+//     baths: 1,
+//     sqft: 90,
+//     propertyType: "apartment",
+//     propertyStatus: "for-rent",
+//   },
+// ];
 
 const AllProperties = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -140,12 +140,14 @@ const AllProperties = () => {
   console.log("data de tanstack", status, data, error, isFetching)
 
   // Filtrar propiedades basado en los criterios seleccionados
-  const filteredProperties = allProperties.filter((property) => {
+  const filteredProperties = (data || []).filter((property) => {
     // Filtro por término de búsqueda
     if (
       searchTerm &&
       !property.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location.toLowerCase().includes(searchTerm.toLowerCase())
+      !property.location.city.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location.country.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location.address.toLowerCase().includes(searchTerm.toLowerCase())
     ) {
       return false;
     }
@@ -161,12 +163,12 @@ const AllProperties = () => {
     }
 
     // Filtro por número mínimo de habitaciones
-    if (minBeds !== null && property.beds < minBeds) {
+    if (minBeds !== null && property.bedrooms < minBeds) {
       return false;
     }
 
     // Filtro por número mínimo de baños
-    if (minBaths !== null && property.baths < minBaths) {
+    if (minBaths !== null && property.bathrooms < minBaths) {
       return false;
     }
 
@@ -337,7 +339,7 @@ const AllProperties = () => {
           {filteredProperties.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProperties.map((property) => (
-                <PropertyCard key={property.id} {...property} />
+                <PropertyCard key={property._id} {...property} />
               ))}
             </div>
           ) : (

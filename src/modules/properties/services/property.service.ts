@@ -26,7 +26,6 @@ export const getProperties = async () => {
 export const getPropertyById = async ({ queryKey }: { queryKey: string[] }) => {
   const [, id] = queryKey;
   const token = localStorage.getItem("token")
-  console.log("ya po", id, token)
   const response = await fetch(`${API_BASE}/getPropertyById/${id}`, {
     method: "GET",
     headers: {

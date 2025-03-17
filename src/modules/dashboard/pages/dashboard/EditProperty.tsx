@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PropertyForm from "@/modules/dashboard/components/PropertyForm";
 import { Property } from "@/types";
@@ -7,46 +7,64 @@ import { useToast } from "@/hooks/use-toast";
 // Usamos datos de ejemplo para la demostración
 const mockProperties = [
   {
-    id: "1",
+    _id: "1",
     title: "Apartamento de Lujo en Zona Exclusiva",
     description: "Hermoso apartamento con vistas increíbles",
     price: 350000,
-    location: "Madrid, España",
+    location: {
+      country: "España",
+      city: "Madrid",
+      address: "Direccion en Madrid-España"
+    },
     bedrooms: 3,
     bathrooms: 2,
     area: 120,
-    imageUrl: "https://source.unsplash.com/random/300x200/?apartment",
+    images: "https://source.unsplash.com/random/300x200/?apartment",
     featured: true,
     propertyType: 'apartment',
     propertyStatus: "for-sale",
+    isNew: true,
+    contractType: "rent",
   },
   {
-    id: "2",
+    _id: "2",
     title: "Casa Familiar con Jardín",
     description: "Amplia casa con jardín y piscina",
     price: 450000,
-    location: "Barcelona, España",
+    location: {
+      country: "España",
+      city: "Barcelona",
+      address: "Direccion en Barcelona-España"
+    },
     bedrooms: 4,
     bathrooms: 3,
     area: 200,
-    imageUrl: "https://source.unsplash.com/random/300x200/?house",
+    images: "https://source.unsplash.com/random/300x200/?house",
     featured: true,
     propertyType: 'house',
     propertyStatus: "for-sale",
+    isNew: true,
+    contractType: "rent",
   },
   {
-    id: "3",
+    _id: "3",
     title: "Local Comercial Céntrico",
     description: "Local comercial en zona de alto tránsito",
     price: 250000,
-    location: "Valencia, España",
+    location: {
+      country: "España",
+      city: "Valencia",
+      address: "Direccion en Valencia-España"
+    },
     bedrooms: 0,
     bathrooms: 1,
     area: 80,
-    imageUrl: "https://source.unsplash.com/random/300x200/?store",
+    images: "https://source.unsplash.com/random/300x200/?store",
     featured: false,
     propertyType: 'commercial',
     propertyStatus: "for-rent",
+    isNew: true,
+    contractType: "for-rent",
   },
 ];
 
@@ -61,7 +79,7 @@ const EditProperty = () => {
   useEffect(() => {
     // Simulamos una carga de datos
     setTimeout(() => {
-      const foundProperty = mockProperties.find(p => p.id === id);
+      const foundProperty = mockProperties.find(p => p._id === id);
       
       if (foundProperty) {
         setProperty(foundProperty);

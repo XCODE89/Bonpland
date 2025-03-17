@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
 
@@ -22,7 +22,7 @@ const PropertyGallery = ({ images }: PropertyGalleryProps) => {
     setShowFullscreen(!showFullscreen);
   };
 
-  if (images.length === 0) {
+  if (images?.length === 0) {
     return (
       <div className="bg-slate-100 rounded-lg h-[400px] flex items-center justify-center">
         <p className="text-muted-foreground">No hay imágenes disponibles</p>

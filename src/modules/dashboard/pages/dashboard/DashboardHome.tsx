@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building, DollarSign, Users, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const statCards = [
   {
@@ -44,20 +45,23 @@ const DashboardHome = () => {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {statCards.map((card, index) => (
-          <Card key={index} className="overflow-hidden">
-            <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-              <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
-              <div className={`${card.color} p-2 rounded-md`}>
-                <card.icon className="h-4 w-4 text-white" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{card.value}</div>
-              <p className="text-xs text-muted-foreground mt-1">
-                {card.description}
-              </p>
-            </CardContent>
-          </Card>
+          // TODO: definir las rutas a las que lleva cada tarjeta
+          <Link to="#">
+            <Card key={index} className="overflow-hidden">
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
+                <div className={`${card.color} p-2 rounded-md`}>
+                  <card.icon className="h-4 w-4 text-white" />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{card.value}</div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {card.description}
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropertyForm from "@/modules/dashboard/components/PropertyForm";
 import { Property } from "@/types";
@@ -12,17 +12,16 @@ const AddProperty = () => {
   const handleSubmit = (data: Partial<Property>) => {
     setIsLoading(true);
     
-    // Simulando una llamada a API
     setTimeout(() => {
       // Generamos un ID único para la nueva propiedad
       const newProperty = {
         ...data,
         id: `${Date.now()}`, // Usando timestamp como ID temporal
       };
+      console.log(newProperty)
       
       // En una aplicación real, aquí guardaríamos en la base de datos
       // Por ahora, solo mostraremos un toast de éxito
-      console.log("Nueva propiedad:", newProperty);
       
       toast({
         title: "Propiedad creada",

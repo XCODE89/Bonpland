@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import NavBar from "@/components/NavBar";
 import Hero from "@/modules/home/components/Hero";
 import PropertiesCarousel from "@/components/PropertiesCarousel";
@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   useEffect(() => {
@@ -54,9 +55,11 @@ const Home = () => {
         <PropertiesCarousel />
 
         <div className="text-center mt-10">
-          <Button className="bg-estate-primary hover:bg-estate-primary/90">
-            Ver todas las propiedades <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link to="/properties">
+            <Button className="bg-estate-primary hover:bg-estate-primary/90">
+              Ver todas las propiedades <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 

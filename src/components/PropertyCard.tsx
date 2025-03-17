@@ -1,37 +1,21 @@
-
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, BedDouble, Bath, Maximize } from "lucide-react";
 import { Link } from "react-router-dom";
-
-interface PropertyCardProps {
-  id: number;
-  title: string;
-  location: string;
-  price: string;
-  image: string;
-  beds: number;
-  baths: number;
-  sqft: number;
-  featured?: boolean;
-  isNew?: boolean;
-  propertyType?: string;
-  propertyStatus?: string;
-}
+import { Property } from "@/types";
 
 const PropertyCard = ({
-  id,
+  _id,
   title,
   location,
   price,
-  image,
-  beds,
-  baths,
-  sqft,
+  images,
+  bedrooms,
+  bathrooms,
+  area,
   featured,
   isNew,
   propertyStatus,
-}: PropertyCardProps) => {
+}: Property) => {
   const renderStatusBadge = () => {
     if (!propertyStatus) return null;
     
@@ -52,11 +36,11 @@ const PropertyCard = ({
   };
 
   return (
-    <Link to={`/property/${id}`} className="block group">
+    <Link to={`/property/${_id}`} className="block group">
       <div className="estate-card">
         <div className="relative overflow-hidden">
           <img
-            src={image}
+            src={images}
             alt={title}
             className="estate-card-img"
             loading="lazy"
@@ -84,23 +68,23 @@ const PropertyCard = ({
           
           <div className="flex items-center text-sm text-muted-foreground mb-4">
             <MapPin className="h-3.5 w-3.5 mr-1 text-estate-accent" />
-            <span>{location}</span>
+            <span>{location.city} - {location.country}</span>
           </div>
           
           <div className="pt-4 border-t border-slate-100 flex justify-between">
             <div className="flex items-center text-sm">
               <BedDouble className="h-4 w-4 mr-1 text-slate-400" />
-              <span>{beds} hab</span>
+              <span>{bedrooms} hab</span>
             </div>
             
             <div className="flex items-center text-sm">
               <Bath className="h-4 w-4 mr-1 text-slate-400" />
-              <span>{baths} baños</span>
+              <span>{bathrooms} baños</span>
             </div>
             
             <div className="flex items-center text-sm">
               <Maximize className="h-4 w-4 mr-1 text-slate-400" />
-              <span>{sqft} m²</span>
+              <span>{area} m²</span>
             </div>
           </div>
         </div>

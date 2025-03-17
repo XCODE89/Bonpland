@@ -1,10 +1,14 @@
 import { MapPin } from "lucide-react";
 
 interface PropertyMapProps {
-  location: string;
+  location: {
+    country?: string;
+    city?: string;
+    address?: string;
+  }
 }
 
-const PropertyMap = ({ location }: PropertyMapProps) => {
+const PropertyMap = ( {location} : PropertyMapProps) => {
   return (
     <div className="space-y-4">
       <div className="rounded-lg overflow-hidden border border-slate-200 shadow-sm">
@@ -14,7 +18,7 @@ const PropertyMap = ({ location }: PropertyMapProps) => {
           <div className="absolute inset-0 flex items-center justify-center flex-col">
             <MapPin className="h-10 w-10 text-estate-primary mb-2" />
             <p className="text-center text-muted-foreground max-w-xs px-4">
-              {location}
+              {location.address}
             </p>
             <p className="text-xs text-muted-foreground mt-4">
               Mapa interactivo no disponible en esta demostración
@@ -26,7 +30,7 @@ const PropertyMap = ({ location }: PropertyMapProps) => {
       <div>
         <h3 className="text-xl font-semibold mb-3">Ubicación</h3>
         <p className="text-muted-foreground mb-4">
-          Esta propiedad se encuentra en {location}, una zona con excelentes comunicaciones y todos los servicios necesarios cercanos.
+        Esta propiedad se encuentra en {location.address}, una zona con excelentes comunicaciones y todos los servicios necesarios cercanos.
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">

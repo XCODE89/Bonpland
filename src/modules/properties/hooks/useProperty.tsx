@@ -16,6 +16,8 @@ export const useProperty = (propertyId : string) => {
         if (cachedData) {
           return cachedData
         }
+
+        console.log("repetimos llamado")
   
         // Si no están en caché, hacer la petición
         return getPropertyById({ queryKey: ['property', propertyId] })
