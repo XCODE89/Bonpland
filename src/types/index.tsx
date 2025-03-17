@@ -7,21 +7,23 @@ type Location = {
 export interface Property {
     _id: string;
     title: string;
-    description: string;
+    description?: string;
     price: number;
     location: Location;
     bedrooms: number;
     bathrooms: number;
     area: number;
     images: string;
-    propertyType: string;  //'apartment' | 'house' | 'commercial';
-    contractType: string; //'for-sale' | 'for-rent' | 'sold';
-    propertyStatus: string; // disponibilidad;
-    featured: boolean;
-    isNew: boolean
+    propertyType?: string;  //'apartment' | 'house' | 'commercial';
+    contractType?: string; //'for-sale' | 'for-rent' | 'sold';
+    propertyStatus?: string; // disponibilidad;
+    featured?: boolean;
+    isNew?: boolean
     createdAt?: Date
   }
-  
+
+export type NewProperty = Omit<Property, "_id" | "createdAt">;
+
   export interface Contact {
     id: string;
     name: string;

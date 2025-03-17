@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const featuredProperties = [
   {
-    _id: 1,
+    _id: "1",
     title: "Ático de lujo con vistas panorámicas",
     
     location: {
@@ -14,82 +14,77 @@ const featuredProperties = [
       city: "Polanco",
       address: "Polanco - Mexico"
     },
-    price: "$3,500,000",
+    price: 3500000,
     images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
     bedrooms: 3,
     bathrooms: 2,
     area: 150,
     featured: true,
     isNew: true,
-    propertyStatus : "for-sale"
   },
   {
-    _id: 2,
+    _id: "2",
     title: "Apartamento moderno en zona exclusiva",
     location: {
       country: "Mexico",
       city: "Condesa",
       address: "Condesa - Mexico"
     },
-    price: "$2,200,000",
+    price: 2200000,
     images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
     bedrooms: 2,
     bathrooms: 2,
     area: 120,
     isNew: true,
     featured: false,
-    propertyStatus : "for-rent"
   },
   {
-    _id: 3,
+    _id: "3",
     title: "Penthouse con terraza privada",
     location: {
       country: "Mexico",
       city: "Santa Fé",
       address: "Santa Fé - Mexico"
     },
-    price: "$4,100,000",
+    price: 4100000,
     images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
     bedrooms: 4,
     bathrooms: 3,
     area: 220,
     featured: true,
     isNew: false,
-    propertyStatus : "for-sale"
   },
   {
-    _id: 4,
+    _id: "4",
     title: "Apartamento con diseño contemporáneo",
     location: {
       country: "Mexico",
       city: "Roma Norte",
       address: "Roma Norte - Mexico"
     },
-    price: "$1,900,000",
+    price: 1900000,
     images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
     bedrooms: 2,
     bathrooms: 1,
     area: 95,
     isNew: true,
     featured: true,
-    propertyStatus : "for-rent"
   },
   {
-    _id: 5,
+    _id: "5",
     title: "Dúplex con amenidades exclusivas",
     location: {
       country: "Mexico",
       city: "Tijuana",
       address: "Tijuana - Mexico"
     },
-    price: "$5,200,000",
+    price: 5200000,
     images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
     bedrooms: 4,
     bathrooms: 3,
     area: 280,
     featured: true,
     isNew: true,
-    propertyStatus : "for-sale"
   },
 ];
 

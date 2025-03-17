@@ -136,8 +136,25 @@ const AllProperties = () => {
   const [minBeds, setMinBeds] = useState<number | null>(null);
   const [minBaths, setMinBaths] = useState<number | null>(null);
 
-  const { status, data, error, isFetching } = useProperties()
-  console.log("data de tanstack", status, data, error, isFetching)
+  const { data, error, isFetching } = useProperties()
+
+  if (isFetching) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg font-semibold">Cargando propiedades...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-red-600 font-semibold">
+          Ocurrió un error al cargar las propiedades.
+        </p>
+      </div>
+    );
+  }
 
   // Filtrar propiedades basado en los criterios seleccionados
   const filteredProperties = (data || []).filter((property) => {
@@ -158,7 +175,7 @@ const AllProperties = () => {
     }
 
     // Filtro por estado (venta/renta)
-    if (propertyStatus && property.propertyStatus !== propertyStatus) {
+    if (propertyStatus && property.contractType !== propertyStatus) {
       return false;
     }
 
@@ -268,8 +285,8 @@ const AllProperties = () => {
                       Dúplex
                     </Badge>
                     <Badge
-                      className={`cursor-pointer ${getFilterBadgeClass(propertyType === "loft")}`}
-                      onClick={() => setPropertyType(propertyType === "loft" ? null : "loft")}
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyType === "Loft")}`}
+                      onClick={() => setPropertyType(propertyType === "Loft" ? null : "Loft")}
                     >
                       Loft
                     </Badge>
@@ -280,14 +297,14 @@ const AllProperties = () => {
                   <h3 className="text-sm font-medium mb-3">Estado</h3>
                   <div className="flex flex-wrap gap-2">
                     <Badge
-                      className={`cursor-pointer ${getFilterBadgeClass(propertyStatus === "for-sale")}`}
-                      onClick={() => setPropertyStatus(propertyStatus === "for-sale" ? null : "for-sale")}
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyStatus === "Venta")}`}
+                      onClick={() => setPropertyStatus(propertyStatus === "Venta" ? null : "Venta")}
                     >
                       En venta
                     </Badge>
                     <Badge
-                      className={`cursor-pointer ${getFilterBadgeClass(propertyStatus === "for-rent")}`}
-                      onClick={() => setPropertyStatus(propertyStatus === "for-rent" ? null : "for-rent")}
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyStatus === "Alquiler")}`}
+                      onClick={() => setPropertyStatus(propertyStatus === "Alquiler" ? null : "Alquiler")}
                     >
                       En renta
                     </Badge>
@@ -338,9 +355,15 @@ const AllProperties = () => {
 
           {filteredProperties.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProperties.map((property) => (
-                <PropertyCard key={property._id} {...property} />
-              ))}
+              {filteredProperties.map((property) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const {featured, ...propertyFormated} = property
+                return (
+                  <PropertyCard 
+                    key={property._id} 
+                    {...propertyFormated} />
+                )
+              })}
             </div>
           ) : (
             <div className="text-center py-12">

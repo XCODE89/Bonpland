@@ -2,37 +2,15 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Building, LogIn, User, Lock, UserCheck } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-
-import { loginUser } from "@/modules/auth/services/auth.service";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { toast } = useToast();
 
-  const mutation = useMutation({
-    mutationFn: loginUser,
-    onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
-        toast({
-          title: "Inicio de sesión exitoso",
-          description: "Bienvenido de nuevo al panel de administración",
-        });
-        navigate("/dashboard");
-    },
-    onError: (error) => {
-      toast({
-        title: `${error.message}`,
-        description: "Por favor verifique sus credenciales e intente nuevamente",
-        variant: "destructive",
-      });
-    },
-  });
+  const mutation = useLogin()
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

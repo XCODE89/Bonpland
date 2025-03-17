@@ -99,11 +99,29 @@ const propertyImages: Record<string, string[]> = {
 
 const PropertyDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const {data} = useProperty(id ?? "")
+  const {data, error, isFetching} = useProperty(id ?? "")
   const property = data?.property;
   const images = propertyImages[id ?? ""] ? propertyImages[id ?? ""] : [];
   console.log("detail", images)
   const { toast } = useToast();
+
+  if (isFetching) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg font-semibold">Cargando propiedades...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-red-600 font-semibold">
+          Ocurrió un error al cargar las propiedades.
+        </p>
+      </div>
+    );
+  }
   
   if (!property) {
     return (

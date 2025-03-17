@@ -14,22 +14,23 @@ const PropertyCard = ({
   area,
   featured,
   isNew,
-  propertyStatus,
+  contractType,
 }: Property) => {
   const renderStatusBadge = () => {
-    if (!propertyStatus) return null;
+    console.log(contractType)
+    if (!contractType) return null;
     
-    if (propertyStatus === "for-sale") {
+    if (contractType === "Venta") {
       return (
-        <div className="estate-tag right-36 bg-blue-500/80 text-white">
+        <div className="estate-tag left-4 bg-blue-500/80 text-white">
           En Venta
         </div>
       );
-    } else if (propertyStatus === "for-rent") {
+    } else if (contractType === "Alquiler") {
       return (
-        <div className="estate-tag right-36  bg-amber-500/80 text-white">
+        <div className="estate-tag left-4  bg-amber-500/80 text-white">
           En Renta
-        </div>
+        </div>  
       );
     }
     return null;
@@ -46,12 +47,12 @@ const PropertyCard = ({
             loading="lazy"
           />
           {featured && (
-            <div className="estate-tag bg-estate-primary/70 text-white">
+            <div className="estate-tag left-4 bg-estate-primary/70 text-white">
               Destacado
             </div>
           )}
           {isNew && (
-            <div className="estate-tag bg-estate-accent/70 text-white">
+            <div className="estate-tag right-4 bg-estate-accent/70 text-white">
               Nuevo
             </div>
           )}

@@ -2,16 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropertyForm from "@/modules/dashboard/components/PropertyForm";
 import { Property } from "@/types";
-import { useToast } from "@/hooks/use-toast";
+import { useAddProperty } from "@/modules/properties/hooks/useAddProperty";
 
 const AddProperty = () => {
+  const mutation = useAddProperty()
   const navigate = useNavigate();
-  const { toast } = useToast();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (data: Partial<Property>) => {
     setIsLoading(true);
-    
+
+    mutation.mutate(data)
     setTimeout(() => {
       // Generamos un ID único para la nueva propiedad
       const newProperty = {
@@ -23,14 +25,12 @@ const AddProperty = () => {
       // En una aplicación real, aquí guardaríamos en la base de datos
       // Por ahora, solo mostraremos un toast de éxito
       
-      toast({
-        title: "Propiedad creada",
-        description: "La propiedad ha sido creada correctamente.",
-      });
       
       setIsLoading(false);
       navigate("/dashboard/properties");
     }, 1000);
+
+
   };
 
   return (
