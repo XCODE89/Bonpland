@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
+
 interface PropertyContactFormProps {
   propertyId: string;
   propertyTitle: string;
@@ -12,17 +13,18 @@ interface PropertyContactFormProps {
 const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormProps) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [referenceCode, setReferenceCode] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  //todo: completar el envio de formulario
   console.log(propertyId)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const API_BASE = import.meta.env.VITE_API_URL; 
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!name || !email || !phone || !message) {
+  
+    if (!name || !email || !referenceCode || !message) {
       toast({
         title: "Error",
         description: "Por favor, complete todos los campos del formulario.",
@@ -30,26 +32,40 @@ const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormP
       });
       return;
     }
-    
+  
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      
+  
+    try {
+      const response = await fetch(`${API_BASE}/contactMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          referenceCode, 
+          message,
+        }),
+      });
+      if (!response.ok) throw new Error("Error al enviar el formulario");
       toast({
         title: "Mensaje enviado",
         description: "Un agente se pondrá en contacto con usted lo antes posible.",
       });
-      
-      // Reset form
       setName("");
       setEmail("");
-      setPhone("");
       setMessage("");
-    }, 1000);
+      setReferenceCode("")
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Hubo un problema al enviar el mensaje, inténtelo de nuevo.",
+        variant: "destructive",
+      });
+      console.error("Error al enviar el formulario:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
   return (
     <Card>
       <CardContent className="p-6">
@@ -82,9 +98,9 @@ const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormP
           <div>
             <Input
               type="tel"
-              placeholder="Teléfono"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Código de referencia del inmueble"
+              value={referenceCode}
+              onChange={(e) => setReferenceCode(e.target.value)}
               className="w-full"
             />
           </div>
