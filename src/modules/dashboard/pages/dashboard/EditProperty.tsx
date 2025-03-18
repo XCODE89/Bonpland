@@ -3,98 +3,96 @@ import { useNavigate, useParams } from "react-router-dom";
 import PropertyForm from "@/modules/dashboard/components/PropertyForm";
 import { Property } from "@/types";
 import { useToast } from "@/hooks/use-toast";
+import { useProperty } from "@/modules/properties/hooks/useProperty";
 
 // Usamos datos de ejemplo para la demostración
-const mockProperties = [
-  {
-    _id: "1",
-    title: "Apartamento de Lujo en Zona Exclusiva",
-    description: "Hermoso apartamento con vistas increíbles",
-    price: 350000,
-    location: {
-      country: "España",
-      city: "Madrid",
-      address: "Direccion en Madrid-España"
-    },
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 120,
-    images: "https://source.unsplash.com/random/300x200/?apartment",
-    featured: true,
-    propertyType: 'apartment',
-    propertyStatus: "for-sale",
-    isNew: true,
-    contractType: "rent",
-  },
-  {
-    _id: "2",
-    title: "Casa Familiar con Jardín",
-    description: "Amplia casa con jardín y piscina",
-    price: 450000,
-    location: {
-      country: "España",
-      city: "Barcelona",
-      address: "Direccion en Barcelona-España"
-    },
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 200,
-    images: "https://source.unsplash.com/random/300x200/?house",
-    featured: true,
-    propertyType: 'house',
-    propertyStatus: "for-sale",
-    isNew: true,
-    contractType: "rent",
-  },
-  {
-    _id: "3",
-    title: "Local Comercial Céntrico",
-    description: "Local comercial en zona de alto tránsito",
-    price: 250000,
-    location: {
-      country: "España",
-      city: "Valencia",
-      address: "Direccion en Valencia-España"
-    },
-    bedrooms: 0,
-    bathrooms: 1,
-    area: 80,
-    images: "https://source.unsplash.com/random/300x200/?store",
-    featured: false,
-    propertyType: 'commercial',
-    propertyStatus: "for-rent",
-    isNew: true,
-    contractType: "for-rent",
-  },
-];
+// const mockProperties = [
+//   {
+//     _id: "1",
+//     title: "Apartamento de Lujo en Zona Exclusiva",
+//     description: "Hermoso apartamento con vistas increíbles",
+//     price: 350000,
+//     location: {
+//       country: "España",
+//       city: "Madrid",
+//       address: "Direccion en Madrid-España"
+//     },
+//     bedrooms: 3,
+//     bathrooms: 2,
+//     area: 120,
+//     images: "https://source.unsplash.com/random/300x200/?apartment",
+//     featured: true,
+//     propertyType: 'apartment',
+//     propertyStatus: "for-sale",
+//     isNew: true,
+//     contractType: "rent",
+//   },
+//   {
+//     _id: "2",
+//     title: "Casa Familiar con Jardín",
+//     description: "Amplia casa con jardín y piscina",
+//     price: 450000,
+//     location: {
+//       country: "España",
+//       city: "Barcelona",
+//       address: "Direccion en Barcelona-España"
+//     },
+//     bedrooms: 4,
+//     bathrooms: 3,
+//     area: 200,
+//     images: "https://source.unsplash.com/random/300x200/?house",
+//     featured: true,
+//     propertyType: 'house',
+//     propertyStatus: "for-sale",
+//     isNew: true,
+//     contractType: "rent",
+//   },
+//   {
+//     _id: "3",
+//     title: "Local Comercial Céntrico",
+//     description: "Local comercial en zona de alto tránsito",
+//     price: 250000,
+//     location: {
+//       country: "España",
+//       city: "Valencia",
+//       address: "Direccion en Valencia-España"
+//     },
+//     bedrooms: 0,
+//     bathrooms: 1,
+//     area: 80,
+//     images: "https://source.unsplash.com/random/300x200/?store",
+//     featured: false,
+//     propertyType: 'commercial',
+//     propertyStatus: "for-rent",
+//     isNew: true,
+//     contractType: "for-rent",
+//   },
+// ];
 
 const EditProperty = () => {
-  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const { data } = useProperty(id ?? "")
   const { toast } = useToast();
   const [property, setProperty] = useState<Property | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
-    // Simulamos una carga de datos
-    setTimeout(() => {
-      const foundProperty = mockProperties.find(p => p._id === id);
-      
-      if (foundProperty) {
-        setProperty(foundProperty);
-      } else {
-        toast({
-          title: "Error",
-          description: "No se encontró la propiedad solicitada.",
-          variant: "destructive",
-        });
-        navigate("/dashboard/properties");
-      }
-      
-      setIsFetching(false);
-    }, 500);
-  }, [id, navigate, toast]);
+    if (data) {
+      setProperty(data);
+    } else {
+      toast({
+        title: "Error",
+        description: "No se encontró la propiedad solicitada.",
+        variant: "destructive",
+      });
+      navigate("/dashboard/properties");
+    }
+    
+    setIsFetching(false);
+  }, [id, navigate, toast, data]);
 
   const handleSubmit = (data: Partial<Property>) => {
     setIsLoading(true);

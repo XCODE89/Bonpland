@@ -137,7 +137,7 @@ const AllProperties = () => {
   const [minBaths, setMinBaths] = useState<number | null>(null);
 
   const { data, error, isFetching } = useProperties()
-
+  console.log("hook", data)
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">

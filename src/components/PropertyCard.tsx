@@ -13,11 +13,10 @@ const PropertyCard = ({
   bathrooms,
   area,
   featured,
-  isNew,
+  isNewProperty,
   contractType,
 }: Property) => {
   const renderStatusBadge = () => {
-    console.log(contractType)
     if (!contractType) return null;
     
     if (contractType === "Venta") {
@@ -41,7 +40,7 @@ const PropertyCard = ({
       <div className="estate-card">
         <div className="relative overflow-hidden">
           <img
-            src={images}
+            src={images[0]}
             alt={title}
             className="estate-card-img"
             loading="lazy"
@@ -51,7 +50,7 @@ const PropertyCard = ({
               Destacado
             </div>
           )}
-          {isNew && (
+          {isNewProperty && (
             <div className="estate-tag right-4 bg-estate-accent/70 text-white">
               Nuevo
             </div>
@@ -69,7 +68,7 @@ const PropertyCard = ({
           
           <div className="flex items-center text-sm text-muted-foreground mb-4">
             <MapPin className="h-3.5 w-3.5 mr-1 text-estate-accent" />
-            <span>{location.city} - {location.country}</span>
+            <span>{location?.city} - {location?.country}</span>
           </div>
           
           <div className="pt-4 border-t border-slate-100 flex justify-between">

@@ -4,73 +4,76 @@ import { Input } from "@/components/ui/input";
 import { PlusCircle, Search, Edit, Trash2, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Property } from "@/types";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { useProperties } from "@/modules/properties/hooks/useProperties";
+import { useDeleteProperty } from "@/modules/properties/hooks/useDeleteProperty";
 
 // Datos de ejemplo
-const mockProperties: Property[] = [
-  {
-    id: "1",
-    title: "Apartamento de Lujo en Zona Exclusiva",
-    description: "Hermoso apartamento con vistas increíbles",
-    price: 350000,
-    location: "Madrid, España",
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 120,
-    imageUrl: "https://source.unsplash.com/random/300x200/?apartment",
-    featured: true,
-    propertyType: "apartment",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: "2",
-    title: "Casa Familiar con Jardín",
-    description: "Amplia casa con jardín y piscina",
-    price: 450000,
-    location: "Barcelona, España",
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 200,
-    imageUrl: "https://source.unsplash.com/random/300x200/?house",
-    featured: true,
-    propertyType: "house",
-    propertyStatus: "for-sale",
-  },
-  {
-    id: "3",
-    title: "Local Comercial Céntrico",
-    description: "Local comercial en zona de alto tránsito",
-    price: 250000,
-    location: "Valencia, España",
-    bedrooms: 0,
-    bathrooms: 1,
-    area: 80,
-    imageUrl: "https://source.unsplash.com/random/300x200/?store",
-    featured: false,
-    propertyType: "commercial",
-    propertyStatus: "for-rent",
-  },
-];
+// const mockProperties: Property[] = [
+//   {
+//     id: "1",
+//     title: "Apartamento de Lujo en Zona Exclusiva",
+//     description: "Hermoso apartamento con vistas increíbles",
+//     price: 350000,
+//     location: "Madrid, España",
+//     bedrooms: 3,
+//     bathrooms: 2,
+//     area: 120,
+//     imageUrl: "https://source.unsplash.com/random/300x200/?apartment",
+//     featured: true,
+//     propertyType: "apartment",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: "2",
+//     title: "Casa Familiar con Jardín",
+//     description: "Amplia casa con jardín y piscina",
+//     price: 450000,
+//     location: "Barcelona, España",
+//     bedrooms: 4,
+//     bathrooms: 3,
+//     area: 200,
+//     imageUrl: "https://source.unsplash.com/random/300x200/?house",
+//     featured: true,
+//     propertyType: "house",
+//     propertyStatus: "for-sale",
+//   },
+//   {
+//     id: "3",
+//     title: "Local Comercial Céntrico",
+//     description: "Local comercial en zona de alto tránsito",
+//     price: 250000,
+//     location: "Valencia, España",
+//     bedrooms: 0,
+//     bathrooms: 1,
+//     area: 80,
+//     imageUrl: "https://source.unsplash.com/random/300x200/?store",
+//     featured: false,
+//     propertyType: "commercial",
+//     propertyStatus: "for-rent",
+//   },
+// ];
 
 const PropertiesManagement = () => {
-  const navigate = useNavigate();
-  const [properties, setProperties] = useState<Property[]>(mockProperties);
-  const [searchTerm, setSearchTerm] = useState("");
-  const { toast } = useToast();
+  const {data} = useProperties()
+  const { mutate: deleteProperty } = useDeleteProperty()
+  console.log(data)
 
-  const filteredProperties = properties.filter(
+
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredProperties = data?.filter(
     (property) =>
-      property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      property.location.toLowerCase().includes(searchTerm.toLowerCase())
+      property.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      property.location?.country?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      property.location?.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      property.location?.address?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleDeleteProperty = (id: string) => {
-    setProperties(properties.filter((property) => property.id !== id));
-    toast({
-      title: "Propiedad eliminada",
-      description: "La propiedad ha sido eliminada correctamente.",
-    });
+    deleteProperty(id);
   };
 
   const handleAddProperty = () => {
@@ -78,6 +81,7 @@ const PropertiesManagement = () => {
   };
 
   const handleEditProperty = (id: string) => {
+    console.log("hola", id)
     navigate(`/dashboard/properties/edit/${id}`);
   };
 
@@ -152,14 +156,14 @@ const PropertiesManagement = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredProperties.map((property) => (
-                <tr key={property.id} className="hover:bg-gray-50">
+              {filteredProperties?.map((property) => (
+                <tr key={property._id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0">
                         <img
                           className="h-10 w-10 rounded-md object-cover"
-                          src={property.imageUrl}
+                          src={property.images[0]}
                           alt={property.title}
                         />
                       </div>
@@ -174,7 +178,7 @@ const PropertiesManagement = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {property.location}
+                  {property.location. city} - {property.location. country}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {formatPrice(property.price)}
@@ -187,21 +191,21 @@ const PropertiesManagement = () => {
                       <Button 
                         variant="ghost" 
                         size="sm"
-                        onClick={() => handleViewProperty(property.id)}
+                        onClick={() => handleViewProperty(property._id)}
                       >
                         <Eye className="h-4 w-4" />
                       </Button>
                       <Button 
                         variant="ghost" 
                         size="sm"
-                        onClick={() => handleEditProperty(property.id)}
+                        onClick={() => handleEditProperty(property._id)}
                       >
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleDeleteProperty(property.id)}
+                        onClick={() => handleDeleteProperty(property._id)}
                       >
                         <Trash2 className="h-4 w-4 text-red-500" />
                       </Button>

@@ -12,23 +12,9 @@ const AddProperty = () => {
 
   const handleSubmit = (data: Partial<Property>) => {
     setIsLoading(true);
-
     mutation.mutate(data)
-    setTimeout(() => {
-      // Generamos un ID único para la nueva propiedad
-      const newProperty = {
-        ...data,
-        id: `${Date.now()}`, // Usando timestamp como ID temporal
-      };
-      console.log(newProperty)
-      
-      // En una aplicación real, aquí guardaríamos en la base de datos
-      // Por ahora, solo mostraremos un toast de éxito
-      
-      
-      setIsLoading(false);
-      navigate("/dashboard/properties");
-    }, 1000);
+    setIsLoading(false);
+    navigate("/dashboard/properties");
 
 
   };

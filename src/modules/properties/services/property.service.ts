@@ -1,9 +1,9 @@
-import { NewProperty } from "@/types";
+import { Property } from "@/types";
 
 const API_BASE = import.meta.env.VITE_API_URL;
 const token = localStorage.getItem("token")
 
-export const addNewProperty = async (property: NewProperty) => {
+export const addNewProperty = async (property: Partial<Property>) => {
   const response = await fetch(`${API_BASE}/newProperty`, {
     method: "POST",
     headers: {
@@ -12,6 +12,8 @@ export const addNewProperty = async (property: NewProperty) => {
     },
     body: JSON.stringify(property),
   })
+  console.log("servicio", JSON.stringify(property))
+  console.log(response)
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }
@@ -43,6 +45,22 @@ export const getPropertyById = async ({ queryKey }: { queryKey: string[] }) => {
       'Content-Type': 'application/json',
     }
   })
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.statusText}`)
+  }
+
+  return await response.json()
+}
+
+export const deleteProperty = async (id: string) => {
+  const response = await fetch(`${API_BASE}/deleteProperty/${id}`, {
+    method: "DELETE",
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  })
+
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }

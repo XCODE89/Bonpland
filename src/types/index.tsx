@@ -13,12 +13,12 @@ export interface Property {
     bedrooms: number;
     bathrooms: number;
     area: number;
-    images: string;
+    images: string[];
     propertyType?: string;  //'apartment' | 'house' | 'commercial';
     contractType?: string; //'for-sale' | 'for-rent' | 'sold';
     propertyStatus?: string; // disponibilidad;
     featured?: boolean;
-    isNew?: boolean
+    isNewProperty?: boolean
     createdAt?: Date
   }
 

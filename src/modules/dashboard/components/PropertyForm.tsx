@@ -27,8 +27,6 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
 
   const handleChangeTab = (direction: "next" | "prev") => {
     const newIndex = direction === "next" ? currentTabIndex + 1 : currentTabIndex - 1;
-    // if (newIndex < 0) newIndex = tabs.length - 1;  // Si es anterior y está en la primera pestaña, va al final
-    // if (newIndex >= tabs.length) newIndex = 0;  // Si es siguiente y está en la última pestaña, va al principio
     setActiveTab(tabs[newIndex]);
   };
 
@@ -44,10 +42,12 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
     bedrooms: 0,
     bathrooms: 0,
     area: 0,
-    images: "https://source.unsplash.com/random/300x200/?apartment",
+    images: ["https://img.freepik.com/vector-gratis/logo-propiedad-siluetas-casas_1025-20.jpg?t=st=1742234030~exp=1742237630~hmac=937a850fbac29ac5d697770a7e4a1d56e1c527b8462ac9304fbb5794e2cde0e3&w=740"],
+    propertyType: "Departamento",
+    contractType: "Venta",
+    propertyStatus: "Disponible",
     featured: false,
-    propertyType: "apartment",
-    propertyStatus: "for-sale",
+    isNewProperty: false
   });
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                     name="title"
                     placeholder="Ingrese el título de la propiedad"
                     className="pl-10"
-                    value={formData.title}
+                    value={formData.title || ""}
                     onChange={handleChange}
                     required
                   />
@@ -136,7 +136,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                   name="description"
                   placeholder="Descripción detallada de la propiedad"
                   className="w-full min-h-[120px] px-3 py-2 rounded-md border border-input"
-                  value={formData.description}
+                  value={formData.description || ""}
                   onChange={handleChange}
                   required
                 />
@@ -154,7 +154,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                     type="number"
                     placeholder="Precio"
                     className="pl-10"
-                    value={formData.price || ""}
+                    value={formData.price || 0}
                     onChange={handleChange}
                     required
                   />
@@ -206,14 +206,14 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="status" className="text-sm font-medium">
+                  <label htmlFor="propertyStatus" className="text-sm font-medium">
                     Estado
                   </label>
                   <select
-                    id="status"
-                    name="status"
+                    id="propertyStatus"
+                    name="propertyStatus"
                     className="w-full h-10 px-3 rounded-md border border-input"
-                    value={formData.propertyStatus}
+                    value={formData.propertyStatus || ""}
                     onChange={handleChange}
                     required
                   >
@@ -233,7 +233,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                       id="propertyType"
                       name="propertyType"
                       className="w-full h-10 pl-10 px-3 rounded-md border border-input"
-                      value={formData.propertyType}
+                      value={formData.propertyType || ""}
                       onChange={handleChange}
                       required
                     >
@@ -251,7 +251,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                   id="featured"
                   name="featured"
                   className="rounded border-gray-300"
-                  checked={formData.featured}
+                  checked={formData.featured || false}
                   onChange={(e) => 
                     setFormData({
                       ...formData,
@@ -286,7 +286,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                       type="number"
                       placeholder="Número de habitaciones"
                       className="pl-10"
-                      value={formData.bedrooms || ""}
+                      value={formData.bedrooms || 0}
                       onChange={handleChange}
                       required
                     />
@@ -305,7 +305,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                       type="number"
                       placeholder="Número de baños"
                       className="pl-10"
-                      value={formData.bathrooms || ""}
+                      value={formData.bathrooms || 0}
                       onChange={handleChange}
                       required
                     />
@@ -324,7 +324,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                       type="number"
                       placeholder="Área en m²"
                       className="pl-10"
-                      value={formData.area || ""}
+                      value={formData.area || 0}
                       onChange={handleChange}
                       required
                     />
@@ -378,7 +378,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 <div className="mt-4">
                   <p className="mb-2 text-sm font-medium">Vista previa:</p>
                   <img 
-                    src={formData.images} 
+                    src={formData.images[0]} 
                     alt="Vista previa" 
                     className="h-40 w-full object-cover rounded-md"
                   />

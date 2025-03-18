@@ -58,7 +58,8 @@ const NavBar = () => {
                 <div className="h-full flex flex-col items-center justify-center space-y-8">
                   <a href="#properties" className="text-xl font-medium" onClick={toggleMenu}>Propiedades</a>
                   <a href="#about" className="text-xl font-medium" onClick={toggleMenu}>Nosotros</a>
-                  <Link to="/" className="text-xl font-medium" onClick={toggleMenu}>Contacto</Link>to  /     <Link to="/dashboard" className="text-estate-dark hover:text-estate-primary transition-colors">Admin</Link>
+                  <Link to="/contact" className="text-xl font-medium" onClick={toggleMenu}>Contacto</Link>
+                  <Link to="/dashboard" className="text-xl font-medium">Admin</Link>
                   <Button className="mt-8 bg-estate-primary hover:bg-estate-primary/90" onClick={toggleMenu}>
                     <Search className="mr-2 h-4 w-4" /> Buscar Propiedades
                   </Button>
@@ -82,7 +83,7 @@ const NavBar = () => {
                 Nosotros
               </Link>
               <a
-                href="/#contact"
+                href="/contact"
                 className="text-lg font-medium text-estate-primary relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-estate-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
                 Contacto
