@@ -15,25 +15,24 @@ export const addNewProperty = async (property: Partial<Property>) => {
   console.log("servicio", JSON.stringify(property))
   console.log(response)
   if (!response.ok) {
-    throw new Error(`Error ${response.status}: ${response.statusText}`)
+    throw new Error(`Error ${response.status}: No se agregò la propiedad`)
   }
 
   return await response.json()
 }
 
 export const getProperties = async () => {
-  const response = await fetch(`${API_BASE}/getAllProperties`, {
+  const response = await fetch(`${API_BASE}/getProperties`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-  })
+  }).then(response => response.json())
 
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }
-
-  return await response.json()
+  return await response.getProperties
 } 
   
 export const getPropertyById = async ({ queryKey }: { queryKey: string[] }) => {
@@ -41,10 +40,27 @@ export const getPropertyById = async ({ queryKey }: { queryKey: string[] }) => {
   const response = await fetch(`${API_BASE}/getPropertyById/${id}`, {
     method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     }
+  }).then(response => response.json());
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.statusText}`)
+  }
+  console.log("servicio", response.property, id)
+
+  return await response.property
+}
+
+export const editProperty = async (id: string, formdata: Partial<Property>) => {
+  const response = await fetch(`${API_BASE}/updateProperty/${id}`, {
+    method: "PUT",
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formdata)
   })
+
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }

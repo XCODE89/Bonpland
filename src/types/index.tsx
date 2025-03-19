@@ -22,15 +22,13 @@ export interface Property {
     createdAt?: Date
   }
 
-export type NewProperty = Omit<Property, "_id" | "createdAt">;
-
-  export interface Contact {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    message: string;
-    propertyId?: string;
-    dateCreated: string;
-    status: 'new' | 'contacted' | 'closed';
-  }
+export interface Contact {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  referenceCode?: string;
+  dateCreated: string;
+  status: string // 'new' | 'contacted' | 'closed';
+}

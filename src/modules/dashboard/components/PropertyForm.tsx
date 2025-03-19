@@ -17,7 +17,6 @@ interface PropertyFormProps {
 
 const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormProps) => {
   const navigate = useNavigate();
-//   const { toast } = useToast();
   const isEditMode = !!property;
 
   const [activeTab, setActiveTab] = useState<string>("basic");
@@ -52,13 +51,13 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
 
   useEffect(() => {
     if (property) {
+      console.log("carga la info?", property.images[0])
       setFormData(property);
     }
   }, [property]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
-    
     if (type === "checkbox") {
       const target = e.target as HTMLInputElement;
       setFormData({
@@ -71,8 +70,13 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
         [name]: parseFloat(value) || 0,
       });
     } else {
-      // Si el campo es una propiedad dentro de `location`
-      if (formData.location && name in formData.location) {
+      if(name === "images") {
+        console.log("cambiando")
+        setFormData({
+          ...formData,
+          images: formData.images ? [value, ...formData.images] : [value]
+        })
+      }else if (formData.location && name in formData.location) {
         setFormData({
           ...formData,
           location: {
@@ -120,7 +124,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                     name="title"
                     placeholder="Ingrese el título de la propiedad"
                     className="pl-10"
-                    value={formData.title || ""}
+                    value={formData?.title || ""}
                     onChange={handleChange}
                     required
                   />
@@ -348,11 +352,11 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 <div className="relative">
                   <ImagePlus className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
-                    id="imageUrl"
-                    name="imageUrl"
+                    id="images"
+                    name="images"
                     placeholder="URL de la imagen"
                     className="pl-10"
-                    value={formData.images}
+                    value={formData.images?.[0] || ""}
                     onChange={handleChange}
                     required
                   />

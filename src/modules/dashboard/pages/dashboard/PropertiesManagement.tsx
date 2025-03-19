@@ -56,13 +56,20 @@ import { useDeleteProperty } from "@/modules/properties/hooks/useDeleteProperty"
 // ];
 
 const PropertiesManagement = () => {
-  const {data} = useProperties()
-  const { mutate: deleteProperty } = useDeleteProperty()
-  console.log(data)
-
-
   const navigate = useNavigate();
+  const {data, isPending} = useProperties()
+  console.log(data)
+  const { mutate: deleteProperty } = useDeleteProperty()
+
   const [searchTerm, setSearchTerm] = useState("");
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg font-semibold">Cargando propiedades...</p>
+      </div>
+    );
+  }
 
   const filteredProperties = data?.filter(
     (property) =>

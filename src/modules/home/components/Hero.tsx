@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -32,12 +33,14 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-estate-primary text-estate-light hover:bg-estate-light">
-              <Search className="mr-2 h-4 w-4" /> 
-              Buscar propiedades
-            </Button>
+            <Link 
+              to="/properties" 
+              className="bg-estate-primary text-estate-light hover:bg-estate-primary/90 flex items-center justify-center py-2 px-4 rounded-lg"
+            >
+              <Search className="mr-2 h-4 w-4" />Buscar propiedades
+            </Link>
             
-            <Button variant="outline" size="lg" className="border-estate-primary bg-transparent text-estate-primary hover:bg-estate-light">
+            <Button variant="outline" size="lg" className="border-estate-primary bg-transparent text-estate-primary hover:bg-estate-light/30">
               <MapPin className="mr-2 h-4 w-4" /> 
               Explorar ubicaciones
             </Button>

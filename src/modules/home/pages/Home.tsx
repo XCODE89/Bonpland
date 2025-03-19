@@ -212,7 +212,7 @@ const Home = () => {
                     className="w-full p-3 rounded-md bg-estate-white border border-white/20 text-estate-dark placeholder:text-black/50 focus:outline-none focus:ring-2 focus:ring-white/30"
                   ></textarea>
                 </div>
-                <Button className="w-full bg-estate-accent text-estate-primary hover:bg-estate-accent/70">
+                <Button className="w-full bg-estate-primary text-estate-light hover:bg-estate-primary/70">
                   Enviar mensaje
                 </Button>
               </form>

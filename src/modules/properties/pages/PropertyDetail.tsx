@@ -72,40 +72,38 @@ import { useProperty } from "../hooks/useProperty";
 // };
 
 // TODO traer del backend
-const propertyImages: Record<string, string[]> = {
-  "1": [
-    "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    "https://source.unsplash.com/photo-1502672260266-1c1ef2d93688",
-    "https://source.unsplash.com/photo-1560448204-e02f11c3d0e2",
-    "https://source.unsplash.com/photo-1560185893-a55cbc8c57e8",
-    "https://source.unsplash.com/photo-1556912167-f556f1f39fdf"
-  ],
-  "2": [
-    "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
-    "https://source.unsplash.com/photo-1484154218962-a197022b5858",
-    "https://source.unsplash.com/photo-1505691938895-1758d7feb511",
-    "https://source.unsplash.com/photo-1560185007-c5ca9d2c014d",
-    "https://source.unsplash.com/photo-1560448075-57d0285fc59b"
-  ],
-  "3": [
-    "https://source.unsplash.com/photo-1497366754035-f200968a6e72",
-    "https://source.unsplash.com/photo-1497366811353-6870744d04b2",
-    "https://source.unsplash.com/photo-1497215842964-222b430dc094",
-    "https://source.unsplash.com/photo-1497217968520-7d8d60b7bc25",
-    "https://source.unsplash.com/photo-1486304873000-235643847519"
-  ]
-};
+// const propertyImages: Record<string, string[]> = {
+//   "1": [
+//     "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     "https://source.unsplash.com/photo-1502672260266-1c1ef2d93688",
+//     "https://source.unsplash.com/photo-1560448204-e02f11c3d0e2",
+//     "https://source.unsplash.com/photo-1560185893-a55cbc8c57e8",
+//     "https://source.unsplash.com/photo-1556912167-f556f1f39fdf"
+//   ],
+//   "2": [
+//     "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+//     "https://source.unsplash.com/photo-1484154218962-a197022b5858",
+//     "https://source.unsplash.com/photo-1505691938895-1758d7feb511",
+//     "https://source.unsplash.com/photo-1560185007-c5ca9d2c014d",
+//     "https://source.unsplash.com/photo-1560448075-57d0285fc59b"
+//   ],
+//   "3": [
+//     "https://source.unsplash.com/photo-1497366754035-f200968a6e72",
+//     "https://source.unsplash.com/photo-1497366811353-6870744d04b2",
+//     "https://source.unsplash.com/photo-1497215842964-222b430dc094",
+//     "https://source.unsplash.com/photo-1497217968520-7d8d60b7bc25",
+//     "https://source.unsplash.com/photo-1486304873000-235643847519"
+//   ]
+// };
 
 
 const PropertyDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const {data, error, isFetching} = useProperty(id ?? "")
-  const property = data?.property;
-  const images = propertyImages[id ?? ""] ? propertyImages[id ?? ""] : [];
-  console.log("detail", images)
+  const {data, error, isPending} = useProperty(id ?? "")
+  const property = data;
   const { toast } = useToast();
 
-  if (isFetching) {
+  if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <p className="text-lg font-semibold">Cargando propiedades...</p>
@@ -236,7 +234,7 @@ const PropertyDetail = () => {
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <PropertyGallery images={images} />
+            <PropertyGallery images={property.images} />
             
             <div className="mt-8">
               <Tabs defaultValue="details">

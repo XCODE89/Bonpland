@@ -1,8 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient } from "@tanstack/react-query";
-import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./modules/home/pages/Home";
 import NotFound from "./pages/NotFound";
@@ -14,8 +13,6 @@ import SettingsPage from "./modules/dashboard/pages/dashboard/SettingsPage";
 import Login from "./modules/auth/pages/Login";
 import PropertyDetail from "./modules/properties/pages/PropertyDetail";
 import AllProperties from "./modules/properties/pages/AllProperties";
-
-import { persister } from './config/persist/persistOptions'
 import { About } from "./modules/about/pages/About";
 import AddProperty from "./modules/dashboard/pages/dashboard/AddProperty";
 import EditProperty from "./modules/dashboard/pages/dashboard/EditProperty";
@@ -23,7 +20,7 @@ import EditProperty from "./modules/dashboard/pages/dashboard/EditProperty";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+  <QueryClientProvider client={queryClient} >
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -48,7 +45,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-  </PersistQueryClientProvider>
+  </QueryClientProvider>
 );
 
 export default App;

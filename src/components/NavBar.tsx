@@ -60,9 +60,13 @@ const NavBar = () => {
                   <a href="#about" className="text-xl font-medium" onClick={toggleMenu}>Nosotros</a>
                   <Link to="/contact" className="text-xl font-medium" onClick={toggleMenu}>Contacto</Link>
                   <Link to="/dashboard" className="text-xl font-medium">Admin</Link>
-                  <Button className="mt-8 bg-estate-primary hover:bg-estate-primary/90" onClick={toggleMenu}>
+                  <Link 
+                    to="/properties" 
+                    className="text-estate-light mt-8 bg-estate-primary hover:bg-estate-primary/90 flex items-center justify-center py-2 px-4 rounded-lg"
+                    onClick={toggleMenu}
+                  >
                     <Search className="mr-2 h-4 w-4" /> Buscar Propiedades
-                  </Button>
+                  </Link>
                 </div>
               </div>
             )}
@@ -97,9 +101,12 @@ const NavBar = () => {
               {/* <Button variant="outline">
                 <Phone className="mr-2 h-4 w-4" /> Llamar
               </Button> */}
-              <Button className="bg-estate-primary hover:bg-estate-primary/90">
+              <Link 
+                to="/properties" 
+                className="text-estate-light bg-estate-primary hover:bg-estate-primary/90 flex items-center justify-center py-2 px-4 rounded-lg"
+              >
                 <Search className="mr-2 h-4 w-4" /> Buscar
-              </Button>
+              </Link>
             </div>
           </>
         )}

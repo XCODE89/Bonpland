@@ -46,8 +46,8 @@ const DashboardHome = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {statCards.map((card, index) => (
           // TODO: definir las rutas a las que lleva cada tarjeta
-          <Link to="#">
-            <Card key={index} className="overflow-hidden">
+          <Link to="/dashboard/properties" key={index}>
+            <Card className="overflow-hidden">
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
                 <div className={`${card.color} p-2 rounded-md`}>

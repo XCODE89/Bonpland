@@ -4,6 +4,7 @@ import PropertyForm from "@/modules/dashboard/components/PropertyForm";
 import { Property } from "@/types";
 import { useToast } from "@/hooks/use-toast";
 import { useProperty } from "@/modules/properties/hooks/useProperty";
+import { useEditProperty } from "@/modules/properties/hooks/useEditProperty";
 
 // Usamos datos de ejemplo para la demostración
 // const mockProperties = [
@@ -74,9 +75,10 @@ const EditProperty = () => {
   const navigate = useNavigate();
 
   const { data } = useProperty(id ?? "")
+  console.log("data", data)
+  const { mutate: editProperty, isPending } = useEditProperty()
   const { toast } = useToast();
   const [property, setProperty] = useState<Property | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -94,23 +96,10 @@ const EditProperty = () => {
     setIsFetching(false);
   }, [id, navigate, toast, data]);
 
-  const handleSubmit = (data: Partial<Property>) => {
-    setIsLoading(true);
-    
-    // Simulando una llamada a API
-    setTimeout(() => {
-      // En una aplicación real, aquí actualizaríamos la base de datos
-      // Por ahora, solo mostraremos un toast de éxito
-      console.log("Propiedad actualizada:", data);
-      
-      toast({
-        title: "Propiedad actualizada",
-        description: "La propiedad ha sido actualizada correctamente.",
-      });
-      
-      setIsLoading(false);
-      navigate("/dashboard/properties");
-    }, 1000);
+  const handleSubmit = (formData: Partial<Property>) => {
+    console.log("importantte", data)
+    if (id) editProperty({id, formData})
+    navigate("/dashboard/properties");
   };
 
   if (isFetching) {
@@ -142,7 +131,7 @@ const EditProperty = () => {
       <PropertyForm 
         property={property} 
         onSubmit={handleSubmit} 
-        isLoading={isLoading} 
+        isLoading={isPending} 
       />
     </div>
   );

@@ -1,8 +1,7 @@
-
-import React from "react";
 import { Home, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -34,19 +33,19 @@ const Footer = () => {
             <h4 className="font-semibold mb-4 text-white">Enlaces rápidos</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Inicio</a>
+                <Link to="/" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Inicio</Link>
               </li>
               <li>
-                <a href="#properties" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Propiedades</a>
+                <Link to="/properties" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Propiedades</Link>
               </li>
               <li>
-                <a href="#testimonials" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Testimonios</a>
+                <Link to="/" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Testimonios</Link>
               </li>
               <li>
-                <a href="#about" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Nosotros</a>
+                <Link to="/about" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Nosotros</Link>
               </li>
               <li>
-                <a href="#contact" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Contacto</a>
+                <Link to="/" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Contacto</Link>
               </li>
             </ul>
           </div>

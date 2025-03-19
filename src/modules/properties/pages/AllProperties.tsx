@@ -136,9 +136,9 @@ const AllProperties = () => {
   const [minBeds, setMinBeds] = useState<number | null>(null);
   const [minBaths, setMinBaths] = useState<number | null>(null);
 
-  const { data, error, isFetching } = useProperties()
-  console.log("hook", data)
-  if (isFetching) {
+  const { data, error, isPending } = useProperties()
+  console.log("data", data)
+  if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <p className="text-lg font-semibold">Cargando propiedades...</p>
@@ -161,10 +161,10 @@ const AllProperties = () => {
     // Filtro por término de búsqueda
     if (
       searchTerm &&
-      !property.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location.city.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location.country.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location.address.toLowerCase().includes(searchTerm.toLowerCase())
+      !property.title?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location?.city.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location?.country.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location?.address.toLowerCase().includes(searchTerm.toLowerCase())
     ) {
       return false;
     }

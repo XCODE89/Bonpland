@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropertyCard from "./PropertyCard";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -15,7 +15,7 @@ const featuredProperties = [
       address: "Polanco - Mexico"
     },
     price: 3500000,
-    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
     bedrooms: 3,
     bathrooms: 2,
     area: 150,
@@ -31,7 +31,7 @@ const featuredProperties = [
       address: "Condesa - Mexico"
     },
     price: 2200000,
-    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
     bedrooms: 2,
     bathrooms: 2,
     area: 120,
@@ -47,7 +47,7 @@ const featuredProperties = [
       address: "Santa Fé - Mexico"
     },
     price: 4100000,
-    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
     bedrooms: 4,
     bathrooms: 3,
     area: 220,
@@ -63,7 +63,7 @@ const featuredProperties = [
       address: "Roma Norte - Mexico"
     },
     price: 1900000,
-    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
     bedrooms: 2,
     bathrooms: 1,
     area: 95,
@@ -79,7 +79,7 @@ const featuredProperties = [
       address: "Tijuana - Mexico"
     },
     price: 5200000,
-    images: "https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp",
+    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
     bedrooms: 4,
     bathrooms: 3,
     area: 280,

@@ -1,23 +1,23 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editProperty } from "../services/property.service";
 import { toast } from "@/hooks/use-toast";
-import { Property } from "@/types";
+import { addNewContact } from "../services/contact.service";
 
-export const useEditProperty = () => {
+export const useAddContact = () => {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: ({ id, formData }: { id: string; formData: Partial<Property> }) => editProperty(id, formData),
+        mutationFn: addNewContact,
         onSuccess: () => {
             toast({
-                title: "Propiedad actualizada",
-                description: "La propiedad se ha actualizado exitosamente",
+                title: "Mensaje enviado",
+                description: "Un agente se pondrá en contacto con usted lo antes posible.",
             });
+            // TODO: cambiar por el query de contactos
             queryClient.invalidateQueries({ queryKey: ["properties"] });
         },
         onError: (error) => {
             toast({
-                title: "Error al actualizar",
+                title: "Error al enviar la solicitud",
                 description: `${error.message}`,
                 variant: "destructive",
               });

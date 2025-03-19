@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
+import { useAddContact } from "@/modules/contacts/hooks/useAddContact";
+import { toast } from "@/hooks/use-toast";
 
 interface PropertyContactFormProps {
   propertyId: string;
@@ -10,18 +11,16 @@ interface PropertyContactFormProps {
 }
 
 const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormProps) => {
+  const mutation = useAddContact()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-  //todo: completar el envio de formulario
+  const [message, setMessage] = useState(`Hola, estoy interesado en "${propertyTitle}". Por favor, contacten conmigo lo antes posible.`);
   console.log(propertyId)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!name || !email || !phone || !message) {
       toast({
         title: "Error",
@@ -29,25 +28,21 @@ const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormP
         variant: "destructive",
       });
       return;
+    }    
+    
+    const contact = {
+      name,
+      email,
+      phone,
+      message,
+      referenceCode: `${propertyId}`,
+      status:"new"
     }
-    
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      
-      toast({
-        title: "Mensaje enviado",
-        description: "Un agente se pondrá en contacto con usted lo antes posible.",
-      });
-      
-      // Reset form
-      setName("");
-      setEmail("");
-      setPhone("");
-      setMessage("");
-    }, 1000);
+    mutation.mutate(contact)
+    setName("");
+    setEmail("");
+    setPhone("");
+    setMessage("");
   };
 
   return (
@@ -94,14 +89,13 @@ const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormP
               placeholder="Mensaje"
               rows={4}
               className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              defaultValue={`Hola, estoy interesado en "${propertyTitle}". Por favor, contacten conmigo lo antes posible.`}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
           </div>
           
-          <Button type="submit" className="w-full bg-estate-primary hover:bg-estate-primary/90" disabled={isSubmitting}>
-            {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+          <Button type="submit" className="w-full bg-estate-primary hover:bg-estate-primary/90" disabled={mutation.isPending}>
+            {mutation.isPending ? "Enviando..." : "Enviar mensaje"}
           </Button>
         </form>
       </CardContent>
