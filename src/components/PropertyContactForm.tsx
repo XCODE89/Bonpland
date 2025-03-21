@@ -16,7 +16,6 @@ const PropertyContactForm = ({ propertyId, propertyTitle }: PropertyContactFormP
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState(`Hola, estoy interesado en "${propertyTitle}". Por favor, contacten conmigo lo antes posible.`);
-  console.log(propertyId)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

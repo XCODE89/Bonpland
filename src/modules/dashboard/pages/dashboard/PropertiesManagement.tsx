@@ -58,7 +58,6 @@ import { useDeleteProperty } from "@/modules/properties/hooks/useDeleteProperty"
 const PropertiesManagement = () => {
   const navigate = useNavigate();
   const {data, isPending} = useProperties()
-  console.log(data)
   const { mutate: deleteProperty } = useDeleteProperty()
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -88,7 +87,6 @@ const PropertiesManagement = () => {
   };
 
   const handleEditProperty = (id: string) => {
-    console.log("hola", id)
     navigate(`/dashboard/properties/edit/${id}`);
   };
 

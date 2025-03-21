@@ -137,7 +137,6 @@ const AllProperties = () => {
   const [minBaths, setMinBaths] = useState<number | null>(null);
 
   const { data, error, isPending } = useProperties()
-  console.log("data", data)
   if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">

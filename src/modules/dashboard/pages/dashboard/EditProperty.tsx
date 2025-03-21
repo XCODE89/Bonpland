@@ -75,7 +75,6 @@ const EditProperty = () => {
   const navigate = useNavigate();
 
   const { data } = useProperty(id ?? "")
-  console.log("data", data)
   const { mutate: editProperty, isPending } = useEditProperty()
   const { toast } = useToast();
   const [property, setProperty] = useState<Property | null>(null);
@@ -97,7 +96,6 @@ const EditProperty = () => {
   }, [id, navigate, toast, data]);
 
   const handleSubmit = (formData: Partial<Property>) => {
-    console.log("importantte", data)
     if (id) editProperty({id, formData})
     navigate("/dashboard/properties");
   };

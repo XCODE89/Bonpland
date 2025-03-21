@@ -7,7 +7,6 @@ interface PropertyGalleryProps {
 }
 
 const PropertyGallery = ({ images }: PropertyGalleryProps) => {
-  console.log(images)
   const [currentImage, setCurrentImage] = useState(0);
   const [showFullscreen, setShowFullscreen] = useState(false);
 

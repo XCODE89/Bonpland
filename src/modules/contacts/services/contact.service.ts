@@ -17,17 +17,17 @@ export const addNewContact = async (contact:Partial<Contact>) => {
   return await response.json()
 }
 
-// export const getProperties = async () => {
-//   console.log("peticion")
-//   const response = await fetch(`${API_BASE}/getProperties`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   }).then(response => response.json())
-
-//   if (!response.ok) {
-//     throw new Error(`Error ${response.status}: ${response.statusText}`)
-//   }
-//   return await response.getProperties
-// } 
+export const getContacts = async () => {
+  const response = await fetch(`${API_BASE}/getContactMessage`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(response => response.json())
+  console.log("contactos json", response)
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.statusText}. No se pudo traer la informacion`)
+  }
+  console.log("contactos", response)
+  return await response.getProperties
+}

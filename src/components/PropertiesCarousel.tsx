@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import PropertyCard from "./PropertyCard";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useFeatured } from "@/modules/properties/hooks/useFeatured";
 
 const featuredProperties = [
   {
@@ -89,6 +90,8 @@ const featuredProperties = [
 ];
 
 const PropertiesCarousel = () => {
+  const { data, isPending, isFetching, status, error } = useFeatured();
+  console.log(data, isPending, isFetching, status, error)
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const itemsToShow = 3;

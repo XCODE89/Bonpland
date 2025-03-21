@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, MailOpen, MailX, Archive } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Contact } from "@/types";
 import { useToast } from "@/hooks/use-toast";
+import { useContacts } from "@/modules/contacts/hooks/useContacts";
 
 // Datos de ejemplo
 const mockContacts: Contact[] = [
@@ -14,7 +15,7 @@ const mockContacts: Contact[] = [
     email: "carlos@example.com",
     phone: "+34 612 345 678",
     message: "Estoy interesado en el apartamento de lujo en Madrid. Me gustaría coordinar una visita lo antes posible.",
-    propertyId: "1",
+    referenceCode: "1",
     dateCreated: "2023-06-10T15:30:45Z",
     status: "new",
   },
@@ -24,7 +25,7 @@ const mockContacts: Contact[] = [
     email: "maria@example.com",
     phone: "+34 623 456 789",
     message: "Me interesa la casa familiar con jardín. ¿Hay posibilidad de negociar el precio?",
-    propertyId: "2",
+    referenceCode: "2",
     dateCreated: "2023-06-09T10:15:20Z",
     status: "contacted",
   },
@@ -34,13 +35,15 @@ const mockContacts: Contact[] = [
     email: "juan@example.com",
     phone: "+34 634 567 890",
     message: "Quisiera obtener más información sobre el local comercial en Valencia.",
-    propertyId: "3",
+    referenceCode: "3",
     dateCreated: "2023-06-08T09:45:30Z",
     status: "closed",
   },
 ];
 
 const ContactsManagement = () => {
+  const {data} = useContacts()
+  console.log("data de contactos", data)
   const [contacts, setContacts] = useState<Contact[]>(mockContacts);
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();

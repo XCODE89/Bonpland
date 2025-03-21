@@ -51,7 +51,6 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
 
   useEffect(() => {
     if (property) {
-      console.log("carga la info?", property.images[0])
       setFormData(property);
     }
   }, [property]);
@@ -71,7 +70,6 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
       });
     } else {
       if(name === "images") {
-        console.log("cambiando")
         setFormData({
           ...formData,
           images: formData.images ? [value, ...formData.images] : [value]

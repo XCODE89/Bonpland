@@ -12,10 +12,8 @@ export const addNewProperty = async (property: Partial<Property>) => {
     },
     body: JSON.stringify(property),
   })
-  console.log("servicio", JSON.stringify(property))
-  console.log(response)
   if (!response.ok) {
-    throw new Error(`Error ${response.status}: No se agregò la propiedad`)
+    throw new Error(`Error ${response.status}: No se agregó la propiedad`)
   }
 
   return await response.json()
@@ -27,12 +25,12 @@ export const getProperties = async () => {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then(response => response.json())
-
+  })
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }
-  return await response.getProperties
+  const data = await response.json();
+  return await data.getProperties
 } 
   
 export const getPropertyById = async ({ queryKey }: { queryKey: string[] }) => {
@@ -42,14 +40,30 @@ export const getPropertyById = async ({ queryKey }: { queryKey: string[] }) => {
     headers: {
       'Content-Type': 'application/json',
     }
-  }).then(response => response.json());
+  })
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }
-  console.log("servicio", response.property, id)
 
-  return await response.property
+  const data = await response.json();
+  return await data.property
 }
+
+export const getFeaturedProperties = async () => {
+  const response = await fetch(`${API_BASE}/getDestacados`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.statusText}`)
+  }
+  
+  const data = await response.json();
+  console.group("servicio", data)
+  return data
+} 
 
 export const editProperty = async (id: string, formdata: Partial<Property>) => {
   const response = await fetch(`${API_BASE}/updateProperty/${id}`, {
@@ -80,6 +94,6 @@ export const deleteProperty = async (id: string) => {
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}`)
   }
-
-  return await response.json()
+  const data = await response.json();
+  return data
 }
