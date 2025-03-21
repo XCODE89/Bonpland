@@ -23,11 +23,11 @@ export const getContacts = async () => {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then(response => response.json())
-  console.log("contactos json", response)
+  })
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.statusText}. No se pudo traer la informacion`)
   }
-  console.log("contactos", response)
-  return await response.getProperties
+  const data = await response.json();
+  console.log("contactos", data.getcontactMessage)
+  return await data.getcontactMessage
 }

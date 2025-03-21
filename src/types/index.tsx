@@ -23,12 +23,20 @@ export interface Property {
   }
 
 export interface Contact {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   phone: string;
   message: string;
   referenceCode?: string;
-  dateCreated: string;
+  createdAt: string;
   status: string // 'new' | 'contacted' | 'closed';
+}
+
+export interface PropertyMapProps {
+  location: {
+    country?: string;
+    city?: string;
+    address?: string;
+  };
 }

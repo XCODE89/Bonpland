@@ -8,47 +8,47 @@ import { useToast } from "@/hooks/use-toast";
 import { useContacts } from "@/modules/contacts/hooks/useContacts";
 
 // Datos de ejemplo
-const mockContacts: Contact[] = [
-  {
-    id: "1",
-    name: "Carlos Rodríguez",
-    email: "carlos@example.com",
-    phone: "+34 612 345 678",
-    message: "Estoy interesado en el apartamento de lujo en Madrid. Me gustaría coordinar una visita lo antes posible.",
-    referenceCode: "1",
-    dateCreated: "2023-06-10T15:30:45Z",
-    status: "new",
-  },
-  {
-    id: "2",
-    name: "María López",
-    email: "maria@example.com",
-    phone: "+34 623 456 789",
-    message: "Me interesa la casa familiar con jardín. ¿Hay posibilidad de negociar el precio?",
-    referenceCode: "2",
-    dateCreated: "2023-06-09T10:15:20Z",
-    status: "contacted",
-  },
-  {
-    id: "3",
-    name: "Juan García",
-    email: "juan@example.com",
-    phone: "+34 634 567 890",
-    message: "Quisiera obtener más información sobre el local comercial en Valencia.",
-    referenceCode: "3",
-    dateCreated: "2023-06-08T09:45:30Z",
-    status: "closed",
-  },
-];
+// const mockContacts: Contact[] = [
+//   {
+//     id: "1",
+//     name: "Carlos Rodríguez",
+//     email: "carlos@example.com",
+//     phone: "+34 612 345 678",
+//     message: "Estoy interesado en el apartamento de lujo en Madrid. Me gustaría coordinar una visita lo antes posible.",
+//     referenceCode: "1",
+//     dateCreated: "2023-06-10T15:30:45Z",
+//     status: "new",
+//   },
+//   {
+//     id: "2",
+//     name: "María López",
+//     email: "maria@example.com",
+//     phone: "+34 623 456 789",
+//     message: "Me interesa la casa familiar con jardín. ¿Hay posibilidad de negociar el precio?",
+//     referenceCode: "2",
+//     dateCreated: "2023-06-09T10:15:20Z",
+//     status: "contacted",
+//   },
+//   {
+//     id: "3",
+//     name: "Juan García",
+//     email: "juan@example.com",
+//     phone: "+34 634 567 890",
+//     message: "Quisiera obtener más información sobre el local comercial en Valencia.",
+//     referenceCode: "3",
+//     dateCreated: "2023-06-08T09:45:30Z",
+//     status: "closed",
+//   },
+// ];
 
 const ContactsManagement = () => {
-  const {data} = useContacts()
-  console.log("data de contactos", data)
-  const [contacts, setContacts] = useState<Contact[]>(mockContacts);
+  const { data, isPending, status} = useContacts()
+  const [contacts, setContacts] = useState<Contact[]>(data ?? []);
+  console.log("data de contactos", contacts, isPending, status)
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
 
-  const filteredContacts = contacts.filter(
+  const filteredContacts = data?.filter(
     (contact) =>
       contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       contact.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -57,7 +57,7 @@ const ContactsManagement = () => {
   const handleUpdateStatus = (id: string, newStatus: Contact["status"]) => {
     setContacts(
       contacts.map((contact) =>
-        contact.id === id ? { ...contact, status: newStatus } : contact
+        contact._id === id ? { ...contact, status: newStatus } : contact
       )
     );
     
@@ -130,59 +130,66 @@ const ContactsManagement = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredContacts.map((contact) => (
-                <tr key={contact.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      {contact.name}
-                    </div>
-                    <div className="text-xs text-gray-500">{contact.email}</div>
-                    <div className="text-xs text-gray-500">{contact.phone}</div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-gray-500 max-w-md line-clamp-2">
-                      {contact.message}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(contact.dateCreated)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {getStatusBadge(contact.status)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div className="flex gap-2">
-                      {contact.status === "new" && (
+              {isPending
+                  ?<tr>
+                      <td>
+                        cargando
+                      </td>
+                    </tr>
+                :filteredContacts?.map((contact) => (
+                  <tr key={contact._id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">
+                        {contact.name}
+                      </div>
+                      <div className="text-xs text-gray-500">{contact.email}</div>
+                      <div className="text-xs text-gray-500">{contact.phone}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-500 max-w-md line-clamp-2">
+                        {contact.message}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {formatDate(contact.createdAt)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {getStatusBadge(contact.status)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <div className="flex gap-2">
+                        {contact.status === "new" && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleUpdateStatus(contact._id, "contacted")}
+                          >
+                            <MailOpen className="h-4 w-4 text-amber-500" />
+                          </Button>
+                        )}
+                        {contact.status !== "closed" && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleUpdateStatus(contact._id, "closed")}
+                          >
+                            <Archive className="h-4 w-4 text-green-500" />
+                          </Button>
+                        )}
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleUpdateStatus(contact.id, "contacted")}
+                          asChild
                         >
-                          <MailOpen className="h-4 w-4 text-amber-500" />
+                          <a href={`mailto:${contact.email}`}>
+                            <MailX className="h-4 w-4" />
+                          </a>
                         </Button>
-                      )}
-                      {contact.status !== "closed" && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleUpdateStatus(contact.id, "closed")}
-                        >
-                          <Archive className="h-4 w-4 text-green-500" />
-                        </Button>
-                      )}
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        asChild
-                      >
-                        <a href={`mailto:${contact.email}`}>
-                          <MailX className="h-4 w-4" />
-                        </a>
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>
