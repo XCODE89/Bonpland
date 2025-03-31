@@ -6,11 +6,7 @@ import { PropertyMapProps } from "@/types";
 
 const googleMap = import.meta.env.VITE_GOOGLE_API
 
-
-
 const PropertyMap = ({ location }: PropertyMapProps) => {
-  console.log(googleMap)
-  console.log()
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: googleMap
   });
@@ -28,7 +24,6 @@ const PropertyMap = ({ location }: PropertyMapProps) => {
       const data = await response.json();
 
       if (data.status === "OK") {
-        console.log(data.results[0].geometry.location)
         setCoordinates(data.results[0].geometry.location);
       } else {
         console.error("Error obteniendo coordenadas:", data.status);
@@ -69,7 +64,7 @@ const PropertyMap = ({ location }: PropertyMapProps) => {
           servicios necesarios cercanos.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
-          // TODO podria traerse esta informacion de base de datos
+           {/* TODO:  podria traerse esta informacion de base de datos */}
           {["Transporte público cercano", "Escuelas y colegios", "Centros comerciales", "Parques y zonas verdes", "Servicios sanitarios", "Restaurantes y ocio"].map((item) => (
             <div key={item} className="flex items-center text-muted-foreground">
               <span className="h-1.5 w-1.5 rounded-full bg-estate-primary mr-2"></span>

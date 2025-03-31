@@ -5,100 +5,99 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useFeatured } from "@/modules/properties/hooks/useFeatured";
 
-const featuredProperties = [
-  {
-    _id: "1",
-    title: "Ático de lujo con vistas panorámicas",
+// const featuredProperties = [
+//   {
+//     _id: "1",
+//     title: "Ático de lujo con vistas panorámicas",
     
-    location: {
-      country: "Mexico",
-      city: "Polanco",
-      address: "Polanco - Mexico"
-    },
-    price: 3500000,
-    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 150,
-    featured: true,
-    isNew: true,
-  },
-  {
-    _id: "2",
-    title: "Apartamento moderno en zona exclusiva",
-    location: {
-      country: "Mexico",
-      city: "Condesa",
-      address: "Condesa - Mexico"
-    },
-    price: 2200000,
-    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
-    bedrooms: 2,
-    bathrooms: 2,
-    area: 120,
-    isNew: true,
-    featured: false,
-  },
-  {
-    _id: "3",
-    title: "Penthouse con terraza privada",
-    location: {
-      country: "Mexico",
-      city: "Santa Fé",
-      address: "Santa Fé - Mexico"
-    },
-    price: 4100000,
-    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 220,
-    featured: true,
-    isNew: false,
-  },
-  {
-    _id: "4",
-    title: "Apartamento con diseño contemporáneo",
-    location: {
-      country: "Mexico",
-      city: "Roma Norte",
-      address: "Roma Norte - Mexico"
-    },
-    price: 1900000,
-    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
-    bedrooms: 2,
-    bathrooms: 1,
-    area: 95,
-    isNew: true,
-    featured: true,
-  },
-  {
-    _id: "5",
-    title: "Dúplex con amenidades exclusivas",
-    location: {
-      country: "Mexico",
-      city: "Tijuana",
-      address: "Tijuana - Mexico"
-    },
-    price: 5200000,
-    images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 280,
-    featured: true,
-    isNew: true,
-  },
-];
+//     location: {
+//       country: "Mexico",
+//       city: "Polanco",
+//       address: "Polanco - Mexico"
+//     },
+//     price: 3500000,
+//     images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
+//     bedrooms: 3,
+//     bathrooms: 2,
+//     area: 150,
+//     featured: true,
+//     isNew: true,
+//   },
+//   {
+//     _id: "2",
+//     title: "Apartamento moderno en zona exclusiva",
+//     location: {
+//       country: "Mexico",
+//       city: "Condesa",
+//       address: "Condesa - Mexico"
+//     },
+//     price: 2200000,
+//     images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
+//     bedrooms: 2,
+//     bathrooms: 2,
+//     area: 120,
+//     isNew: true,
+//     featured: false,
+//   },
+//   {
+//     _id: "3",
+//     title: "Penthouse con terraza privada",
+//     location: {
+//       country: "Mexico",
+//       city: "Santa Fé",
+//       address: "Santa Fé - Mexico"
+//     },
+//     price: 4100000,
+//     images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
+//     bedrooms: 4,
+//     bathrooms: 3,
+//     area: 220,
+//     featured: true,
+//     isNew: false,
+//   },
+//   {
+//     _id: "4",
+//     title: "Apartamento con diseño contemporáneo",
+//     location: {
+//       country: "Mexico",
+//       city: "Roma Norte",
+//       address: "Roma Norte - Mexico"
+//     },
+//     price: 1900000,
+//     images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
+//     bedrooms: 2,
+//     bathrooms: 1,
+//     area: 95,
+//     isNew: true,
+//     featured: true,
+//   },
+//   {
+//     _id: "5",
+//     title: "Dúplex con amenidades exclusivas",
+//     location: {
+//       country: "Mexico",
+//       city: "Tijuana",
+//       address: "Tijuana - Mexico"
+//     },
+//     price: 5200000,
+//     images: ["https://http2.mlstatic.com/D_NQ_NP_2X_635154-MLC80454745238_112024-F-ronda-santo-domingo.webp"],
+//     bedrooms: 4,
+//     bathrooms: 3,
+//     area: 280,
+//     featured: true,
+//     isNew: true,
+//   },
+// ];
 
 const PropertiesCarousel = () => {
-  const { data, isPending, isFetching, status, error } = useFeatured();
-  console.log(data, isPending, isFetching, status, error)
+  const { data } = useFeatured();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const itemsToShow = 3;
   const carouselRef = useRef<HTMLDivElement>(null);
   // Responsive settings
   const [slideItems, setSlideItems] = useState(itemsToShow);
-  const slideCount = Math.ceil(featuredProperties.length / slideItems);
+  const slideCount = Math.ceil((data?.length ?? 0) / slideItems);
   
   
   useEffect(() => {
@@ -163,22 +162,25 @@ const PropertiesCarousel = () => {
             style={{ width: `${100 / slideCount}%` }}
           >
             <div className="flex flex-wrap">
-              {featuredProperties
-                .slice(
+              {data?.slice(
                   slideIndex * slideItems,
                   (slideIndex + 1) * slideItems
                 )
-                .map((property) => (
-                  <div
-                    key={property._id}
-                    className="w-full sm:w-1/2 lg:w-1/3 p-4"
-                    style={{ 
-                      width: `${100 / Math.min(slideItems, featuredProperties.length - (slideIndex * slideItems))}%` 
-                    }}
-                  >
-                    <PropertyCard {...property} />
-                  </div>
-                ))}
+                .map((property) => {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  const {contractType, ...propertyFormated} = property || {}
+                  return (
+                    <div
+                      key={property?._id}
+                      className="w-full sm:w-1/2 lg:w-1/3 p-4"
+                      style={{ 
+                        width: `${100 / Math.min(slideItems, data?.length - (slideIndex * slideItems))}%` 
+                      }}
+                    >
+                      <PropertyCard {...propertyFormated} />
+                    </div>
+                  )
+                })}
             </div>
           </div>
         ))}

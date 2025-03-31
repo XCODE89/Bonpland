@@ -10,67 +10,67 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Home className="h-5 w-5" />
+              <Home className="h-5 w-5 text-estate-accent" />
               <span className="font-semibold text-lg">Bonpland</span>
             </div>
-            <p className="text-estate-secondary/90 mb-6 text-sm">
+            <p className="text-estate-light mb-6 text-sm">
               Ofrecemos las mejores propiedades inmobiliarias exclusivas con un servicio personalizado y profesional.
             </p>
             <div className="flex space-x-3">
-              <Button variant="outline" size="icon" className="rounded-full border-white/20 hover:bg-white/10">
+              <Button variant="outline" size="icon" className="rounded-full bg-estate-accent border-white/20 hover:bg-white/10">
                 <Facebook className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon" className="rounded-full border-white/20 hover:bg-white/10">
+              <Button variant="outline" size="icon" className="rounded-full bg-estate-accent border-white/20 hover:bg-white/10">
                 <Instagram className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon" className="rounded-full border-white/20 hover:bg-white/10">
+              <Button variant="outline" size="icon" className="rounded-full bg-estate-accent border-white/20 hover:bg-white/10">
                 <Twitter className="h-4 w-4" />
               </Button>
             </div>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4 text-white">Enlaces rápidos</h4>
+            <h4 className="font-semibold mb-4 text-estate-light">Enlaces rápidos</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Inicio</Link>
+                <Link to="/" className="hover:text-white text-sm transition-colors">Inicio</Link>
               </li>
               <li>
-                <Link to="/properties" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Propiedades</Link>
+                <Link to="/properties" className="hover:text-white text-sm transition-colors">Propiedades</Link>
               </li>
               <li>
-                <Link to="/" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Testimonios</Link>
+                <Link to="/" className="hover:text-white text-sm transition-colors">Testimonios</Link>
               </li>
               <li>
-                <Link to="/about" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Nosotros</Link>
+                <Link to="/about" className="hover:text-white text-sm transition-colors">Nosotros</Link>
               </li>
               <li>
-                <Link to="/" className="text-estate-secondary/90 hover:text-white text-sm transition-colors">Contacto</Link>
+                <Link to="/" className="hover:text-white text-sm transition-colors">Contacto</Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4 text-white">Contacto</h4>
+            <h4 className="font-semibold mb-4 text-estate-light">Contacto</h4>
             <div className="space-y-3">
               <div className="flex items-start">
-                <MapPin className="h-5 w-5 mr-3 text-estate-secondary" />
-                <span className="text-estate-secondary/90 text-sm">direccion</span>
+                <MapPin className="h-5 w-5 mr-3 text-estate-accent" />
+                <span className="text-sm">direccion</span>
               </div>
               <div className="flex items-start">
-                <Phone className="h-5 w-5 mr-3 text-estate-secondary" />
-                <span className="text-estate-secondary/90 text-sm">telefono</span>
+                <Phone className="h-5 w-5 mr-3 text-estate-accent" />
+                <span className="text-sm">telefono</span>
               </div>
               <div className="flex items-start">
-                <Mail className="h-5 w-5 mr-3 text-estate-secondary" />
-                <span className="text-estate-secondary/90 text-sm">info@bonpland.com</span>
+                <Mail className="h-5 w-5 mr-3 text-estate-accent" />
+                <span className="text-sm">info@bonpland.com</span>
               </div>
             </div>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4 text-white">Suscríbete</h4>
-            <p className="text-estate-secondary/90 mb-4 text-sm">
+            <p className="text-estate-light mb-4 text-sm">
               Recibe nuestras últimas propiedades y ofertas exclusivas.
             </p>
             <div className="flex space-x-2">
@@ -79,7 +79,7 @@ const Footer = () => {
                 placeholder="Tu email"
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               />
-              <Button className="bg-white text-estate-primary hover:bg-white/90">
+              <Button className="bg-estate-accent text-estate-primary hover:bg-white/90">
                 Enviar
               </Button>
             </div>

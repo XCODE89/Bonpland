@@ -15,7 +15,7 @@ const PropertyCard = ({
   featured,
   isNewProperty,
   contractType,
-}: Property) => {
+}: Partial<Property>) => {
   const renderStatusBadge = () => {
     if (!contractType) return null;
     
@@ -40,7 +40,7 @@ const PropertyCard = ({
       <div className="estate-card">
         <div className="relative overflow-hidden">
           <img
-            src={images[0]}
+            src={images?.[0]}
             alt={title}
             className="estate-card-img"
             loading="lazy"

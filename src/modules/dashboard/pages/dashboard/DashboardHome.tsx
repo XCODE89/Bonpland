@@ -9,6 +9,7 @@ const statCards = [
     icon: Building,
     description: "12 nuevas este mes",
     color: "bg-blue-500",
+    ruta: "properties"
   },
   {
     title: "Contactos Recibidos",
@@ -16,6 +17,8 @@ const statCards = [
     icon: Users,
     description: "24 sin responder",
     color: "bg-emerald-500",
+    ruta: "contacts"
+
   },
   {
     title: "Ingresos Estimados",
@@ -23,6 +26,7 @@ const statCards = [
     icon: DollarSign,
     description: "+18% desde el mes pasado",
     color: "bg-purple-500",
+    ruta: "properties"
   },
   {
     title: "Tiempo Promedio de Venta",
@@ -30,6 +34,7 @@ const statCards = [
     icon: Clock,
     description: "4 días menos que el mes pasado",
     color: "bg-amber-500",
+    ruta: "properties"
   },
 ];
 
@@ -46,7 +51,7 @@ const DashboardHome = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {statCards.map((card, index) => (
           // TODO: definir las rutas a las que lleva cada tarjeta
-          <Link to="/dashboard/properties" key={index}>
+          <Link to={`/dashboard/${card.ruta}`} key={index}>
             <Card className="overflow-hidden">
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">{card.title}</CardTitle>

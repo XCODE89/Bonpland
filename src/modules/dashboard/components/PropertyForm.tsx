@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { useToast } from "@/hooks/use-toast";
 import { Property } from "@/types";
 import { MapPin, DollarSign, Home, Tag, BedDouble, Bath, Maximize, ImagePlus } from "lucide-react";
+import AddressInput from "@/components/Autocomplete";
+
 
 interface PropertyFormProps {
   property?: Property;
@@ -17,9 +19,16 @@ interface PropertyFormProps {
 
 const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormProps) => {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const isEditMode = !!property;
-
   const [activeTab, setActiveTab] = useState<string>("basic");
+
+
+  const handleFileSelection = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   const tabs = ["basic", "details", "images"];  // El orden de las pestañas
   const currentTabIndex = tabs.indexOf(activeTab);
@@ -42,9 +51,9 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
     bathrooms: 0,
     area: 0,
     images: ["https://img.freepik.com/vector-gratis/logo-propiedad-siluetas-casas_1025-20.jpg?t=st=1742234030~exp=1742237630~hmac=937a850fbac29ac5d697770a7e4a1d56e1c527b8462ac9304fbb5794e2cde0e3&w=740"],
-    propertyType: "Departamento",
-    contractType: "Venta",
-    propertyStatus: "Disponible",
+    propertyType: "house",
+    contractType: "for-sale",
+    propertyStatus: "avaible",
     featured: false,
     isNewProperty: false
   });
@@ -129,6 +138,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 </div>
               </div>
 
+
               <div className="space-y-2">
                 <label htmlFor="description" className="text-sm font-medium">
                   Descripción
@@ -193,14 +203,13 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 </div>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="address"
-                    name="address"
-                    placeholder="Direccion"
-                    className="pl-10"
+                  <AddressInput
                     value={formData.location?.address}
+                    onSelect={(address) => setFormData((prev) => ({
+                      ...prev,
+                      location: { ...prev.location, address }
+                    }))}
                     onChange={handleChange}
-                    required
                   />
                 </div>
               </div>
@@ -209,7 +218,7 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="propertyStatus" className="text-sm font-medium">
-                    Estado
+                    Tipo de contrato
                   </label>
                   <select
                     id="propertyStatus"
@@ -239,8 +248,11 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                       onChange={handleChange}
                       required
                     >
-                      <option value="apartment">Apartamento</option>
                       <option value="house">Casa</option>
+                      <option value="apartment">Apartamento</option>
+                      <option value="penthouse">Penthouse</option>
+                      <option value="duplex">Duplex</option>
+                      <option value="loft">Loft</option>
                       <option value="commercial">Comercial</option>
                     </select>
                   </div>
@@ -263,6 +275,24 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 />
                 <label htmlFor="featured" className="text-sm font-medium">
                   Destacar esta propiedad
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="isNewProperty"
+                  name="isNewProperty"
+                  className="rounded border-gray-300"
+                  checked={formData.isNewProperty || false}
+                  onChange={(e) => 
+                    setFormData({
+                      ...formData,
+                      isNewProperty: e.target.checked,
+                    })
+                  }
+                />
+                <label htmlFor="featured" className="text-sm font-medium">
+                  Esta propiedad es nueva
                 </label>
               </div>
             </CardContent>
@@ -371,9 +401,22 @@ const PropertyForm = ({ property, onSubmit, isLoading = false }: PropertyFormPro
                 <p className="mt-2 text-xs text-gray-500">
                   PNG, JPG, GIF hasta 10MB
                 </p>
-                <Button type="button" variant="outline" size="sm" className="mt-4">
+                <Button type="button" variant="outline" size="sm" className="mt-4" onClick={handleFileSelection}>
                   Seleccionar archivos
                 </Button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png, image/jpeg, image/gif"
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (files) {
+                      // Aquí puedes manejar los archivos seleccionados
+                      console.log(files);
+                    }
+                  }}
+                />
               </div>
 
               {formData.images && (

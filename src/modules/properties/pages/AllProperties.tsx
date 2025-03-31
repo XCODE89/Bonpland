@@ -137,6 +137,7 @@ const AllProperties = () => {
   const [minBaths, setMinBaths] = useState<number | null>(null);
 
   const { data, error, isPending } = useProperties()
+  console.log("datos de propiedades", data)
   if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -161,9 +162,9 @@ const AllProperties = () => {
     if (
       searchTerm &&
       !property.title?.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location?.city.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location?.country.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !property.location?.address.toLowerCase().includes(searchTerm.toLowerCase())
+      !property.location.city?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location.country?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !property.location.address?.toLowerCase().includes(searchTerm.toLowerCase())
     ) {
       return false;
     }
@@ -284,10 +285,16 @@ const AllProperties = () => {
                       Dúplex
                     </Badge>
                     <Badge
-                      className={`cursor-pointer ${getFilterBadgeClass(propertyType === "Loft")}`}
-                      onClick={() => setPropertyType(propertyType === "Loft" ? null : "Loft")}
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyType === "loft")}`}
+                      onClick={() => setPropertyType(propertyType === "loft" ? null : "loft")}
                     >
                       Loft
+                    </Badge>
+                    <Badge
+                      className={`cursor-pointer ${getFilterBadgeClass(propertyType === "commercial")}`}
+                      onClick={() => setPropertyType(propertyType === "commercial" ? null : "commercial")}
+                    >
+                      Comercial
                     </Badge>
                   </div>
                 </div>

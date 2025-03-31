@@ -16,12 +16,17 @@ import AllProperties from "./modules/properties/pages/AllProperties";
 import { About } from "./modules/about/pages/About";
 import AddProperty from "./modules/dashboard/pages/dashboard/AddProperty";
 import EditProperty from "./modules/dashboard/pages/dashboard/EditProperty";
+import { LoadScript } from "@react-google-maps/api";
+
+const googleMap = import.meta.env.VITE_GOOGLE_API
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient} >
     <TooltipProvider>
+    <LoadScript googleMapsApiKey={googleMap} libraries={["places"]}>
+
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -44,6 +49,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+    </LoadScript>
     </TooltipProvider>
   </QueryClientProvider>
 );

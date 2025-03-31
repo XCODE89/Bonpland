@@ -12,6 +12,7 @@ export const addNewProperty = async (property: Partial<Property>) => {
     },
     body: JSON.stringify(property),
   })
+  console.log("agregando", response)
   if (!response.ok) {
     throw new Error(`Error ${response.status}: No se agregó la propiedad`)
   }

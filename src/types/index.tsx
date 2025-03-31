@@ -1,7 +1,7 @@
 type Location = {
-  country: string;
-  city: string;
-  address: string;
+  country?: string;
+  city?: string;
+  address?: string;
 };
 
 export interface Property {
@@ -18,7 +18,7 @@ export interface Property {
     contractType?: string; //'for-sale' | 'for-rent' | 'sold';
     propertyStatus?: string; // disponibilidad;
     featured?: boolean;
-    isNewProperty?: boolean
+    isNewProperty: boolean
     createdAt?: Date
   }
 
